@@ -88,8 +88,6 @@
     --color-green-800: oklch(44.8% 0.119 151.328);
     --color-green-900: oklch(39.3% 0.095 152.535);
     --color-sky-500: oklch(68.5% 0.169 237.323);
-    --color-sky-600: oklch(58.8% 0.158 241.966);
-    --color-sky-700: oklch(50% 0.134 242.749);
     --color-blue-100: oklch(93.2% 0.032 255.585);
     --color-blue-200: oklch(88.2% 0.059 254.128);
     --color-blue-300: oklch(80.9% 0.105 251.813);
@@ -423,8 +421,8 @@
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
-  .mt-6 {
-    margin-top: calc(var(--spacing) * 6);
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
   }
   .mb-10 {
     margin-bottom: calc(var(--spacing) * 10);
@@ -511,6 +509,12 @@
     width: calc(var(--spacing) * 9);
     height: calc(var(--spacing) * 9);
   }
+  .h-4 {
+    height: calc(var(--spacing) * 4);
+  }
+  .h-6 {
+    height: calc(var(--spacing) * 6);
+  }
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
@@ -534,6 +538,15 @@
   }
   .min-h-screen {
     min-height: 100vh;
+  }
+  .w-4 {
+    width: calc(var(--spacing) * 4);
+  }
+  .w-6 {
+    width: calc(var(--spacing) * 6);
+  }
+  .w-8 {
+    width: calc(var(--spacing) * 8);
   }
   .w-\[50\%\] {
     width: 50%;
@@ -808,9 +821,6 @@
   .bg-background {
     background-color: var(--background);
   }
-  .bg-black {
-    background-color: var(--color-black);
-  }
   .bg-black\/50 {
     background-color: color-mix(in srgb, #000 50%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -837,9 +847,6 @@
   }
   .bg-sky-500 {
     background-color: var(--color-sky-500);
-  }
-  .bg-sky-700 {
-    background-color: var(--color-sky-700);
   }
   .bg-transparent {
     background-color: transparent;
@@ -959,9 +966,6 @@
   }
   .text-destructive {
     color: var(--destructive);
-  }
-  .text-gray-500 {
-    color: var(--color-gray-500);
   }
   .text-gray-700 {
     color: var(--color-gray-700);
@@ -1215,6 +1219,11 @@
   .zoom-out {
     --tw-exit-scale: 0;
   }
+  .\*\:flex {
+    :is(& > *) {
+      display: flex;
+    }
+  }
   .group-data-\[disabled\=true\]\:pointer-events-none {
     &:is(:where(.group)[data-disabled="true"] *) {
       pointer-events: none;
@@ -1328,13 +1337,6 @@
         @supports (color: color-mix(in lab, red, red)) {
           background-color: color-mix(in oklab, var(--secondary) 80%, transparent);
         }
-      }
-    }
-  }
-  .hover\:bg-sky-600 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-sky-600);
       }
     }
   }

@@ -19,10 +19,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { useDispatch, useSelector } from "react-redux";
-import { persistor, RootState } from "@/redux/store/store";
+import { useDispatch } from "react-redux";
+import { persistor } from "@/redux/store/store";
 import { clearUser } from "@/redux/slices/userSlice";
-import { stat } from "fs";
 
 const Navbar = () => {
   const router = useRouter();
@@ -69,6 +68,9 @@ const Navbar = () => {
               <DropdownMenuContent>
                 <DropdownMenuItem className="cursor-pointer">
                   Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  My Store
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   className="cursor-pointer"

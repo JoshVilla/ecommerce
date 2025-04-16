@@ -10,6 +10,7 @@ interface IUser {
   phone: string;
   address: string;
   gender: string;
+  isSeller: boolean;
 }
 
 const UserSchema = new mongoose.Schema<IUser>(
@@ -23,6 +24,7 @@ const UserSchema = new mongoose.Schema<IUser>(
     phone: { type: String, required: true },
     address: { type: String, required: true },
     gender: { type: String, required: true },
+    isSeller: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

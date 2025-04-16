@@ -28,6 +28,8 @@ import { signup } from "@/service/api";
 import { Loader2 } from "lucide-react";
 import { IUser } from "@/utils/types";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import TitlePage from "@/components/titlePage";
 
 // Schema
 const schema = z
@@ -58,6 +60,7 @@ const schema = z
 type FormSchema = z.infer<typeof schema>;
 
 function Page() {
+  const router = useRouter();
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   const form = useForm<FormSchema>({
@@ -82,6 +85,7 @@ function Page() {
       if (data.isSuccess) {
         form.reset();
         toast.success(data.message);
+        router.push("/login");
       } else {
         toast.error(data.message);
       }
@@ -106,7 +110,7 @@ function Page() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="text-2xl font-bold mb-10 text-center">Sign Up</div>
+      <TitlePage title="SignUp" className="mb-10" hasBack />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}

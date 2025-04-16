@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/slices/userSlice";
 import { motion } from "framer-motion";
+import TitlePage from "@/components/titlePage";
 
 // Define the Zod schema for validation
 const schema = z.object({
@@ -66,7 +67,7 @@ function Page() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="text-2xl font-bold mb-10 text-center">Login</div>
+      <TitlePage title="Login" className="mb-10" hasBack />
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Email Input */}
         <div>

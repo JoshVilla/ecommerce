@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
       birthdate,
       phone,
       address,
+      gender,
     } = await request.json();
 
     const existingUser = await User.collection.findOne({ email });
@@ -37,6 +38,7 @@ export async function POST(request: NextRequest) {
       birthdate,
       phone,
       address,
+      gender,
     });
     await newUser.save();
     return NextResponse.json(
