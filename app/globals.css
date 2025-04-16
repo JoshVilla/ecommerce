@@ -3,11 +3,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
-*{
-  margin: 0;
-  padding: 0;
+/* Apply box-sizing globally but avoid resetting margin */
+* {
   box-sizing: border-box;
 }
+
+body {
+  margin: 0;  /* Optional: Reset body margin if needed */
+  padding: 0; /* Optional: Reset body padding if needed */
+}
+
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
