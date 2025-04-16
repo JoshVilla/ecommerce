@@ -35,14 +35,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create JWT token
     const token = jwt.sign(
-      { userId: user._id, email: user.email },
+      { userId: user._id, email: user.email, name: user.firstname },
       JWT_SECRET,
       { expiresIn: "1h" }
     );
 
-    return NextResponse.json({ token }, { status: 200 });
+    return NextResponse.json({ isSuccess: true, token, user }, { status: 200 });
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json({ message: "Error logging in" }, { status: 500 });

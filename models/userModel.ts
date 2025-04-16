@@ -6,6 +6,10 @@ interface IUser {
   middlename: string;
   lastname: string;
   password: string;
+  birthdate: string;
+  phone: string;
+  address: string;
+  gender: string;
 }
 
 const UserSchema = new mongoose.Schema<IUser>(

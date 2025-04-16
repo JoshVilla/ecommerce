@@ -1,10 +1,13 @@
-import Image from "next/image";
+"use client";
+
+import Showcase from "@/components/showcase";
+import Navbar from "@/components/navbar";
 
 export default function Home() {
   return (
-    <div>
-      <div className="text-2xl font-bold mb-10 ">Login</div>
-      <div className="mblock">Hello World</div>
+    <div className="w-full">
+      <Navbar />
+      <Showcase />
     </div>
   );
 }

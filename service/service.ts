@@ -5,9 +5,14 @@ export const post = async <T>(
   params: IServiceParams | FormData = {},
   isFileUpload: boolean = false
 ): Promise<IApiResponse<T>> => {
-  const headers: HeadersInit = isFileUpload
-    ? {}
-    : { "Content-Type": "application/json" };
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+  const headers: HeadersInit = {
+    ...(isFileUpload ? {} : { "Content-Type": "application/json" }),
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+
   const body: string | FormData = isFileUpload
     ? (params as FormData)
     : JSON.stringify(params as IServiceParams);
@@ -20,10 +25,6 @@ export const post = async <T>(
     });
 
     const data: IApiResponse<T> = await response.json();
-
-    // if (!response.ok) {
-    //   throw new Error(data.error || `HTTP Error! Status: ${response.status}`);
-    // }
 
     return data;
   } catch (error) {

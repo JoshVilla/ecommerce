@@ -8,8 +8,11 @@ import InputPassword from "@/components/inputpassword";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/service/api";
 import { toast } from "sonner";
-import { hashPassword } from "@/utils/asyncHelpers";
-import { verifyToken } from "@/utils/nonAsyncHelpers";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slices/userSlice";
+import { motion } from "framer-motion";
 
 // Define the Zod schema for validation
 const schema = z.object({
@@ -24,6 +27,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 function Page() {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -35,7 +40,14 @@ function Page() {
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      toast.success("Login successful!");
+      if (data.isSuccess) {
+        toast.success("Login successful!");
+        localStorage.setItem("token", data.token);
+        router.push("/");
+        dispatch(setUser(data.user));
+      } else {
+        toast.error(data.message);
+      }
     },
     onError: (error) => {
       toast.error("Login failed. Please try again.");
@@ -48,8 +60,13 @@ function Page() {
   };
 
   return (
-    <div className="w-[90%] md:w-[60%] lg:w-[30%] ">
-      <div className="text-2xl font-bold mb-10">Login</div>
+    <motion.div
+      className="w-[90%] md:w-[60%] lg:w-[30%] "
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="text-2xl font-bold mb-10 text-center">Login</div>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Email Input */}
         <div>
@@ -71,12 +88,32 @@ function Page() {
           placeholder="Enter Password"
         />
 
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-gray-700 cursor-pointer hover:underline">
+            Forgot your password?
+          </div>
+          <div className="text-sm text-gray-700 ">
+            Dont have an account?
+            <span
+              className="cursor-pointer hover:underline"
+              onClick={() => router.push("/signup")}
+            >
+              {" "}
+              Sign up
+            </span>
+          </div>
+        </div>
+
         {/* Submit Button */}
         <Button className="mt-4 cursor-pointer w-full" size="sm" type="submit">
-          Login
+          {loginMutation.isPending ? (
+            <Loader2 className="animate-spin" />
+          ) : (
+            "Login"
+          )}
         </Button>
       </form>
-    </div>
+    </motion.div>
   );
 }
 
