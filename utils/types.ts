@@ -15,4 +15,10 @@ export interface IUser {
   firstname: string;
   lastname: string;
   middlename: string;
+  password: string;
+  birthdate: string;
+  phone: string;
+  address?: string;
+  gender: string;
+  confirmPassword?: string;
 }

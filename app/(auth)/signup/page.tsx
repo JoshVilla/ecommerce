@@ -10,7 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { FormProps, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
@@ -23,8 +23,13 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import PasswordIndicator from "@/components/passwordIndicator";
+import { useMutation } from "@tanstack/react-query";
+import { signup } from "@/service/api";
+import { Loader2 } from "lucide-react";
+import { IUser } from "@/utils/types";
+import { toast } from "sonner";
 
-// Schema with confirmPassword
+// Schema
 const schema = z
   .object({
     firstname: z.string().min(1, "Firstname is required"),
@@ -36,8 +41,12 @@ const schema = z
       .min(1, "Email is required"),
     password: z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z.string().min(1, "Please confirm your password"),
-    birthdate: z.string().min(1, "Birthdate is required"),
-    phone: z.string().min(10, "Phone number must be at least 10 digits"),
+    birthdate: z.string().refine((val) => !isNaN(Date.parse(val)), {
+      message: "Invalid birthdate",
+    }),
+    phone: z
+      .string()
+      .regex(/^\d{10,}$/, "Phone number must be at least 10 digits"),
     address: z.string().min(1, "Address is required"),
     gender: z.enum(["male", "female", "other"]),
   })
@@ -46,9 +55,12 @@ const schema = z
     message: "Passwords do not match",
   });
 
+type FormSchema = z.infer<typeof schema>;
+
 function Page() {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const form = useForm({
+
+  const form = useForm<FormSchema>({
     resolver: zodResolver(schema),
     defaultValues: {
       firstname: "",
@@ -60,20 +72,31 @@ function Page() {
       birthdate: "",
       phone: "",
       address: "",
-      gender: "male" as "male" | "female" | "other",
+      gender: "male",
     },
   });
 
-  const handleSubmit = (data: any) => {
-    if (data.password !== data.confirmPassword) {
-      alert("Passwords do not match");
+  const signUpMutation = useMutation({
+    mutationFn: signup,
+    onSuccess: (data) => {
+      if (data.isSuccess) {
+        form.reset();
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || "Something went wrong");
+    },
+  });
+
+  const handleSubmit = (data: FormSchema) => {
+    if (!isPasswordValid) {
+      toast.error("Password is not strong enough");
       return;
-    } else if (!isPasswordValid) {
-      alert("Password is not strong enough");
-      return;
-    } else {
-      console.log("ok", data);
     }
+    signUpMutation.mutate(data);
   };
 
   return (
@@ -155,8 +178,8 @@ function Page() {
                   <FormLabel>Phone</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Enter phone number"
                       type="tel"
+                      placeholder="Enter phone number"
                       {...field}
                     />
                   </FormControl>
@@ -264,13 +287,18 @@ function Page() {
             />
           </div>
 
-          {/* Full-width Submit Button */}
+          {/* Submit Button */}
           <div className="col-span-1 md:col-span-2 text-center">
             <Button
               type="submit"
-              className="w-full md:w-[50%] mx-auto   py-2 rounded cursor-pointer"
+              className="w-full md:w-[50%] mx-auto py-2 rounded"
+              disabled={signUpMutation.isPending}
             >
-              Submit
+              {signUpMutation.isPending ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                "Sign Up"
+              )}
             </Button>
           </div>
         </form>
