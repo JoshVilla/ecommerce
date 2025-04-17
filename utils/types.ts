@@ -22,3 +22,9 @@ export interface IUser {
   gender: string;
   confirmPassword?: string;
 }
+
+export interface IAdmin {
+  _id?: string;
+  username: string;
+  status: string;
+}

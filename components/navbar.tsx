@@ -109,7 +109,7 @@ const Navbar = () => {
           <Button
             size="sm"
             variant="link"
-            className="text-white"
+            className="text-white cursor-pointer"
             onClick={() => router.push("/login")}
           >
             Login
