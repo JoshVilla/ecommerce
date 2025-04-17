@@ -19,3 +19,15 @@ export const getAdmin = async (params: any): Promise<any> => {
 export const loginAdmin = async (params: any): Promise<any> => {
   return await post("/api/admin/login", params);
 };
+
+export const addMilktea = async (params: any): Promise<any> => {
+  return await post("/api/admin/product/addMilktea", params, true);
+};
+
+export const getMilktea = async (params: any): Promise<any> => {
+  return await post("/api/admin/product/getMilktea", params);
+};
+
+export const deleteMilktea = async (params: any): Promise<any> => {
+  return await post("/api/admin/product/deleteMilktea", params);
+};

@@ -1,3 +1,7 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
@@ -13,8 +17,15 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import React from "react";
 
 export default function Page({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const segments = pathname.split("/").filter(Boolean);
+
+  // Remove "admin" from the beginning if it's the first segment
+  const breadcrumbs = segments[0] === "admin" ? segments.slice(1) : segments;
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -27,15 +38,31 @@ export default function Page({ children }: { children: React.ReactNode }) {
           />
           <Breadcrumb>
             <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">
-                  Building Your Application
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
+              {breadcrumbs.map((segment, index) => {
+                const href =
+                  "/admin/" + breadcrumbs.slice(0, index + 1).join("/"); // preserve correct URL
+                const isLast = index === breadcrumbs.length - 1;
+
+                const label = segment
+                  .replace(/([A-Z])/g, " $1")
+                  .replace(/-/g, " ")
+                  .replace(/\b\w/g, (l) => l.toUpperCase());
+
+                return (
+                  <React.Fragment key={href}>
+                    <BreadcrumbItem>
+                      {isLast ? (
+                        <BreadcrumbPage>{label}</BreadcrumbPage>
+                      ) : (
+                        <BreadcrumbLink asChild>
+                          <Link href={href}>{label}</Link>
+                        </BreadcrumbLink>
+                      )}
+                    </BreadcrumbItem>
+                    {!isLast && <BreadcrumbSeparator />}
+                  </React.Fragment>
+                );
+              })}
             </BreadcrumbList>
           </Breadcrumb>
         </header>

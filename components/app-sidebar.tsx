@@ -29,10 +29,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "./ui/button";
 import { DoorOpen } from "lucide-react";
-import { persistor } from "@/redux/store/store";
-import { useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
+import { persistor, RootState } from "@/redux/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { usePathname, useRouter } from "next/navigation";
 import { clearAdmin } from "@/redux/slices/adminSlice";
+import { IAdmin } from "@/utils/types";
 
 // This is sample data.
 const data = {
@@ -48,7 +49,7 @@ const data = {
         },
         {
           title: "Products",
-          url: "#",
+          url: "/admin/products",
         },
         {
           title: "Order",
@@ -86,6 +87,9 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const dispatch = useDispatch();
   const router = useRouter();
+  const pathname = usePathname();
+  console.log(pathname);
+  const state = useSelector((state: RootState) => state.admin.admin as IAdmin);
   const [loadingLogout, setLoadingLogout] = useState(false);
   const handleLogout = async () => {
     setLoadingLogout(true);
@@ -136,7 +140,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <div>Admin</div>
+            <div>{state.username}</div>
           </div>
           <AlertDialog>
             <AlertDialogTrigger asChild>

@@ -22,7 +22,7 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SearchIcon } from "lucide-react";
+import { Loader2, SearchIcon } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 
 // Interfaces
@@ -187,12 +187,7 @@ const SearchForm = <T,>({ api, result, searchProps }: SearchFormProps<T>) => {
           </Button>
           <Button type="submit" size="sm" className="flex gap-1 items-center">
             {loadingSearch ? (
-              <Image
-                src="/assets/Loading.gif"
-                alt="loading"
-                width={10}
-                height={10}
-              />
+              <Loader2 className="animate-spin w-4 h-4" />
             ) : (
               <SearchIcon className="w-4 h-4" />
             )}
