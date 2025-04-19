@@ -89,7 +89,12 @@ function AdminLogin() {
         />
 
         {/* Submit Button */}
-        <Button className="mt-4 cursor-pointer w-full" size="sm" type="submit">
+        <Button
+          disabled={loginMutation.isPending}
+          className="mt-4 cursor-pointer w-full"
+          size="sm"
+          type="submit"
+        >
           {loginMutation.isPending ? (
             <Loader2 className="animate-spin" />
           ) : (

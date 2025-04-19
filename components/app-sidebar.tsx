@@ -34,6 +34,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePathname, useRouter } from "next/navigation";
 import { clearAdmin } from "@/redux/slices/adminSlice";
 import { IAdmin } from "@/utils/types";
+import Link from "next/link";
 
 // This is sample data.
 const data = {
@@ -45,7 +46,7 @@ const data = {
       items: [
         {
           title: "Dashboard",
-          url: "#",
+          url: "/admin/",
         },
         {
           title: "Products",
@@ -122,9 +123,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    {/*@ts-ignore */}
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
+                    <SidebarMenuButton asChild isActive={pathname === item.url}>
+                      <Link href={item.url}>{item.title}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}

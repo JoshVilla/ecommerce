@@ -60,7 +60,11 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(
-      { data: newProduct, isSuccess: true },
+      {
+        data: newProduct,
+        isSuccess: true,
+        message: "Product added successfully!",
+      },
       { status: 201 }
     );
   } catch (error) {

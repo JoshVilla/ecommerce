@@ -1,3 +1,4 @@
+// app/admin/layout.tsx
 "use client";
 
 import { usePathname } from "next/navigation";
@@ -19,11 +20,13 @@ import {
 } from "@/components/ui/sidebar";
 import React from "react";
 
-export default function Page({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
-
-  // Remove "admin" from the beginning if it's the first segment
   const breadcrumbs = segments[0] === "admin" ? segments.slice(1) : segments;
 
   return (
@@ -40,7 +43,7 @@ export default function Page({ children }: { children: React.ReactNode }) {
             <BreadcrumbList>
               {breadcrumbs.map((segment, index) => {
                 const href =
-                  "/admin/" + breadcrumbs.slice(0, index + 1).join("/"); // preserve correct URL
+                  "/admin/" + breadcrumbs.slice(0, index + 1).join("/");
                 const isLast = index === breadcrumbs.length - 1;
 
                 const label = segment

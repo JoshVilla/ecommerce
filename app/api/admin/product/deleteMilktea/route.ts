@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
 
     const item = await Milktea.findById(id);
 
-    const cloudImgId = getCloudinaryPublicId(item.image_url) as string;
+    const cloudImgId = getCloudinaryPublicId(item.imageUrl) as string;
 
     await deleteCloudinaryImage(cloudImgId);
 

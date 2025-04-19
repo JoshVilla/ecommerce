@@ -21,7 +21,7 @@ import TitlePage from "@/components/titlePage";
 import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { addMilktea } from "@/service/api";
-import { error } from "console";
+import { Loader2, Trash } from "lucide-react";
 
 // Zod schema
 const formSchema = z.object({
@@ -294,15 +294,18 @@ export default function AddProductForm() {
                     <Button
                       type="button"
                       variant="destructive"
+                      size="sm"
+                      className="cursor-pointer"
                       onClick={() => removeSize(index)}
                     >
-                      Remove
+                      <Trash />
                     </Button>
                   </div>
                 ))}
                 <Button
                   type="button"
                   variant="outline"
+                  className="cursor-pointer"
                   onClick={() => appendSize({ size: "", ml: "", price: "" })}
                 >
                   + Add Size
@@ -325,23 +328,37 @@ export default function AddProductForm() {
                     <Button
                       type="button"
                       variant="destructive"
+                      className="cursor-pointer"
+                      size="sm"
                       onClick={() => removeAddon(index)}
                     >
-                      Remove
+                      <Trash />
                     </Button>
                   </div>
                 ))}
                 <Button
                   type="button"
                   variant="outline"
+                  className="cursor-pointer"
                   onClick={() => appendAddon({ name: "", price: "" })}
                 >
                   + Add Addon
                 </Button>
               </div>
 
-              <Button type="submit" className="w-full">
-                {addMilkteaMutation.isPending ? "Adding" : "Add Product"}
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={addMilkteaMutation.isPending}
+              >
+                {addMilkteaMutation.isPending ? (
+                  <div className="flex items-center gap-2">
+                    <Loader2 className="animate-spin" />
+                    Adding...
+                  </div>
+                ) : (
+                  "Add Product"
+                )}
               </Button>
             </div>
           </form>

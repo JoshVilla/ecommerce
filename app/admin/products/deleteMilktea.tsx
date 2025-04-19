@@ -31,7 +31,7 @@ function DeleteMilktea({ record, refetch }: Props) {
       if (data.isSuccess) {
         toast.success(data.message);
         refetch();
-        setOpenDialog(false); // ✅ Only closes when successful
+        setOpenDialog(false); // ✅ Close only on success
       } else {
         toast.error("Product deletion failed");
       }
@@ -62,15 +62,22 @@ function DeleteMilktea({ record, refetch }: Props) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={deleteMutation.isPending}>
+          <Button
+            className="cursor-pointer"
+            size="sm"
+            variant="outline"
+            onClick={() => setOpenDialog(false)}
+          >
             Cancel
-          </AlertDialogCancel>
-          <AlertDialogAction
+          </Button>
+          <Button
+            className="cursor-pointer"
+            size="sm"
             onClick={handleDelete}
             disabled={deleteMutation.isPending}
           >
             {deleteMutation.isPending ? "Deleting..." : "Continue"}
-          </AlertDialogAction>
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
