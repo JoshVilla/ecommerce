@@ -3,7 +3,7 @@ import TitlePage from "@/components/titlePage";
 import { Button } from "@/components/ui/button";
 import { getMilktea } from "@/service/api";
 import { useQuery } from "@tanstack/react-query";
-import { Pencil, Plus, Trash } from "lucide-react";
+import { Loader2, Pencil, Plus, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import {
@@ -30,7 +30,52 @@ const Page = () => {
     queryFn: () => getMilktea({}),
   });
 
-  const tableHeader = ["Name", "Description", "Actions"];
+  const tableHeaders = ["Name", "Description", "Actions"];
+
+  const renderTableBody = () => {
+    if (isLoading) {
+      return (
+        <TableRow>
+          <TableCell colSpan={tableHeaders.length} className="text-center">
+            <div className="flex items-center justify-center py-4">
+              <Loader2 className="animate-spin" />
+              <span className="ml-2">Loading...</span>
+            </div>
+          </TableCell>
+        </TableRow>
+      );
+    }
+
+    if (data.length === 0) {
+      return (
+        <TableRow>
+          <TableCell colSpan={tableHeaders.length} className="text-center">
+            No data available
+          </TableCell>
+        </TableRow>
+      );
+    }
+
+    return data?.data?.map((milktea: INewMilktea) => (
+      <TableRow key={milktea._id}>
+        <TableCell>{milktea.name}</TableCell>
+        <TableCell>{milktea.description}</TableCell>
+        <TableCell>
+          <DeleteMilktea refetch={refetch} record={milktea} />
+          <Button
+            variant="ghost"
+            className="cursor-pointer hover:underline"
+            onClick={() =>
+              router.push(`/admin/products/editMilktea/${milktea._id}`)
+            }
+          >
+            <Pencil className="text-blue-400" />
+          </Button>
+        </TableCell>
+      </TableRow>
+    ));
+  };
+
   return (
     <div>
       <TitlePage title="Products" />
@@ -48,28 +93,12 @@ const Page = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                {tableHeader.map((header: string, idx: number) => (
+                {tableHeaders.map((header: string, idx: number) => (
                   <TableHead key={idx}>{header}</TableHead>
                 ))}
               </TableRow>
             </TableHeader>
-            <TableBody>
-              {data?.data?.map((milktea: INewMilktea) => (
-                <TableRow key={milktea._id}>
-                  <TableCell>{milktea.name}</TableCell>
-                  <TableCell>{milktea.description}</TableCell>
-                  <TableCell>
-                    <DeleteMilktea refetch={refetch} record={milktea} />
-                    <Button
-                      variant="ghost"
-                      className="cursor-pointer hover:underline"
-                    >
-                      <Pencil className="text-blue-400" />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+            <TableBody>{renderTableBody()}</TableBody>
           </Table>
         </div>
       </div>

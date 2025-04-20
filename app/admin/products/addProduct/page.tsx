@@ -121,6 +121,8 @@ export default function AddProductForm() {
     onSuccess: (data) => {
       if (data.isSuccess) {
         toast.success(data.message);
+        form.reset();
+        form.clearErrors();
       } else {
         toast.error(data.message);
       }
@@ -306,6 +308,7 @@ export default function AddProductForm() {
                   type="button"
                   variant="outline"
                   className="cursor-pointer"
+                  size="sm"
                   onClick={() => appendSize({ size: "", ml: "", price: "" })}
                 >
                   + Add Size
@@ -339,6 +342,7 @@ export default function AddProductForm() {
                 <Button
                   type="button"
                   variant="outline"
+                  size="sm"
                   className="cursor-pointer"
                   onClick={() => appendAddon({ name: "", price: "" })}
                 >
@@ -346,20 +350,34 @@ export default function AddProductForm() {
                 </Button>
               </div>
 
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={addMilkteaMutation.isPending}
-              >
-                {addMilkteaMutation.isPending ? (
-                  <div className="flex items-center gap-2">
-                    <Loader2 className="animate-spin" />
-                    Adding...
-                  </div>
-                ) : (
-                  "Add Product"
-                )}
-              </Button>
+              <div className="flex items-center justify-end gap-4">
+                <Button
+                  type="submit"
+                  className="cursor-pointer"
+                  size="sm"
+                  disabled={addMilkteaMutation.isPending}
+                >
+                  {addMilkteaMutation.isPending ? (
+                    <div className="flex items-center gap-2">
+                      <Loader2 className="animate-spin" />
+                      Adding...
+                    </div>
+                  ) : (
+                    "Add Product"
+                  )}
+                </Button>
+                <Button
+                  className="cursor-pointer"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    form.reset();
+                    form.clearErrors();
+                  }}
+                >
+                  Clear
+                </Button>
+              </div>
             </div>
           </form>
         </Form>

@@ -6,7 +6,12 @@ export async function POST(req: NextRequest) {
   try {
     await connectToDatabase();
 
-    const products = await Milktea.find({});
+    const { id } = await req.json();
+
+    const params: any = {};
+    if (id) params.id = id;
+
+    const products = await Milktea.find(params);
 
     return NextResponse.json({ data: products });
   } catch (error) {

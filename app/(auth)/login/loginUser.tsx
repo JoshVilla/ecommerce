@@ -106,7 +106,12 @@ function UserLogin() {
         </div>
 
         {/* Submit Button */}
-        <Button className="mt-4 cursor-pointer w-full" size="sm" type="submit">
+        <Button
+          className="mt-4 cursor-pointer w-full"
+          disabled={loginMutation.isPending}
+          size="sm"
+          type="submit"
+        >
           {loginMutation.isPending ? (
             <Loader2 className="animate-spin" />
           ) : (
