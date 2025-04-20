@@ -22,6 +22,7 @@ import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { addMilktea } from "@/service/api";
 import { Loader2, Trash } from "lucide-react";
+import { motion } from "framer-motion";
 
 // Zod schema
 const formSchema = z.object({
@@ -152,7 +153,11 @@ export default function AddProductForm() {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <TitlePage title="Add Product" />
       <div className="mt-6">
         <Form {...form}>
@@ -382,6 +387,6 @@ export default function AddProductForm() {
           </form>
         </Form>
       </div>
-    </div>
+    </motion.div>
   );
 }

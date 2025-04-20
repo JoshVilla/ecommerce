@@ -20,6 +20,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { IAdmin } from "@/models/adminModel";
 import { Loader2, Pencil, Trash } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Page = () => {
   const [dataAdmin, setDataAdmin] = useState<IAdmin[]>([]);
@@ -85,7 +86,11 @@ const Page = () => {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <TitlePage title="List of Admins" />
       <div className="mt-6">
         <AddAdmin refetch={refetch} />
@@ -105,7 +110,7 @@ const Page = () => {
           <TableBody>{renderTableBody()}</TableBody>
         </Table>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -58,7 +58,7 @@ const data = {
         },
         {
           title: "Customers",
-          url: "#",
+          url: "/admin//customers",
         },
         {
           title: "Settings",

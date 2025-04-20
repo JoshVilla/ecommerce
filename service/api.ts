@@ -35,3 +35,7 @@ export const deleteMilktea = async (params: any): Promise<any> => {
 export const editMilktea = async (params: any): Promise<any> => {
   return await post("/api/admin/product/editMilktea", params, true);
 };
+
+export const getCustomers = async (params: any): Promise<any> => {
+  return await post("/api/admin/customers", params);
+};

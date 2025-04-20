@@ -27,6 +27,7 @@ import { editMilktea, getMilktea } from "@/service/api";
 import { toast } from "sonner";
 import { LoadingPage } from "@/components/loadingPage";
 import TitlePage from "@/components/titlePage";
+import { motion } from "framer-motion";
 
 const formSchema = z.object({
   image: z.any().optional(),
@@ -150,7 +151,12 @@ export default function EditMilkteaPage() {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <div className="space-y-6">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="space-y-6"
+    >
       <TitlePage title="Edit Milk Tea" hasBack />
 
       <Form {...form}>
@@ -331,6 +337,6 @@ export default function EditMilkteaPage() {
           </div>
         </form>
       </Form>
-    </div>
+    </motion.div>
   );
 }

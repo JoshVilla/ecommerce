@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/table";
 import { IMilktea } from "@/models/milkteaModel";
 import DeleteMilktea from "./deleteMilktea";
+import { motion } from "framer-motion";
 
 export interface INewMilktea extends IMilktea {
   _id: string;
@@ -77,7 +78,11 @@ const Page = () => {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <TitlePage title="Products" />
       <div className="mt-6">
         <Button
@@ -102,7 +107,7 @@ const Page = () => {
           </Table>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

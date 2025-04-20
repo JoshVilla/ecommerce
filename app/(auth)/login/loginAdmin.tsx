@@ -65,7 +65,7 @@ function AdminLogin() {
       className="w-full "
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.2 }}
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Email Input */}

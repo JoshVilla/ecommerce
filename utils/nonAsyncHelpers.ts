@@ -26,10 +26,6 @@ export const passwordValidation = (
   return isValidFormat && isPasswordMatch ? true : false;
 };
 
-export const formattedDate = (date: string) => {
-  return format(new Date(date), "MM/dd/yyyy");
-};
-
 export const getMetadata = (title: string, description?: string): Metadata => {
   return {
     title: `${title || "Blogify"}`,
@@ -56,4 +52,15 @@ export const getDecodedToken = (): JwtPayload | null => {
     console.error("Error decoding token", err);
     return null;
   }
+};
+
+export const formattedDate = (dateString?: string): string => {
+  if (!dateString) return "N/A";
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return date.toLocaleDateString("en-US", options);
 };
