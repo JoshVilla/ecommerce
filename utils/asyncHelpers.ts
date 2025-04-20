@@ -2,7 +2,7 @@
 import cloudinary from "@/lib/cloudinaryConfig";
 import { connectToDatabase } from "@/lib/mongodb";
 
-import { SALT_ROUNDS } from "./constant";
+import { CLOUD_FOLDER_NAME, SALT_ROUNDS } from "./constant";
 import bcrypt from "bcryptjs";
 import { getCloudinaryPublicId } from "./nonAsyncHelpers";
 
@@ -47,3 +47,19 @@ export const comparePassword = async (
 ) => {
   return await bcrypt.compare(password, hashedPassword);
 };
+
+export async function uploadImageToCloudinary(file: File): Promise<string> {
+  const buffer = Buffer.from(await file.arrayBuffer());
+
+  return new Promise<string>((resolve, reject) => {
+    cloudinary.v2.uploader
+      .upload_stream({ folder: CLOUD_FOLDER_NAME }, (error, result) => {
+        if (error || !result?.secure_url) {
+          console.error("Cloudinary upload failed:", error);
+          return reject("Failed to upload image");
+        }
+        resolve(result.secure_url);
+      })
+      .end(buffer);
+  });
+}
