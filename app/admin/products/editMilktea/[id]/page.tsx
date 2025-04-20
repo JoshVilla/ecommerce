@@ -265,6 +265,7 @@ export default function EditMilkteaPage() {
                     type="button"
                     variant="destructive"
                     size="sm"
+                    className="cursor-pointer"
                     onClick={() => removeSize(index)}
                   >
                     <Trash size={16} />
@@ -273,6 +274,7 @@ export default function EditMilkteaPage() {
               ))}
               <Button
                 type="button"
+                className="cursor-pointer"
                 onClick={() => appendSize({ size: "", ml: "", price: "" })}
               >
                 + Add Size
@@ -296,6 +298,7 @@ export default function EditMilkteaPage() {
                     type="button"
                     variant="destructive"
                     size="sm"
+                    className="cursor-pointer"
                     onClick={() => removeAddon(index)}
                   >
                     <Trash size={16} />
@@ -304,6 +307,7 @@ export default function EditMilkteaPage() {
               ))}
               <Button
                 type="button"
+                className="cursor-pointer"
                 onClick={() => appendAddon({ name: "", price: "" })}
               >
                 + Add Add-on
@@ -312,7 +316,7 @@ export default function EditMilkteaPage() {
 
             <Button
               type="submit"
-              className="w-full"
+              className="w-full cursor-pointer"
               disabled={updateMutation.isPending}
             >
               {updateMutation.isPending ? (

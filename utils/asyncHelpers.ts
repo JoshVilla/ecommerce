@@ -27,7 +27,7 @@ export const replaceNewImagefromCurrentImage = async (
     const res = await collection.findById(id); // Use findById instead of find
 
     if (res) {
-      const publicId = getCloudinaryPublicId(res.image_url);
+      const publicId = getCloudinaryPublicId(res.imageUrl);
       if (publicId) {
         await deleteCloudinaryImage(publicId);
       }
