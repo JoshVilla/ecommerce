@@ -88,9 +88,9 @@ export default function EditMilkteaPage() {
 
   const { data, isLoading } = useQuery({
     queryKey: ["milktea", id],
-    queryFn: () => getMilktea(id),
+    queryFn: () => getMilktea({ id }),
     enabled: !!id,
-    select: (res) => res.data[0], // directly access the record
+    select: (res) => res.data[0],
   });
 
   useEffect(() => {

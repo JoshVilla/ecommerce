@@ -58,11 +58,11 @@ const data = {
         },
         {
           title: "Customers",
-          url: "/admin//customers",
+          url: "/admin/customers",
         },
         {
           title: "Settings",
-          url: "#",
+          url: "/admin/settings",
         },
         {
           title: "Analytics",

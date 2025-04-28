@@ -1,11 +1,7 @@
 {
-  "/api/admin/customers/route": "app/api/admin/customers/route.js",
-  "/api/admin/product/getMilktea/route": "app/api/admin/product/getMilktea/route.js",
-  "/api/admin/getAdmin/route": "app/api/admin/getAdmin/route.js",
-  "/admin/page": "app/admin/page.js",
+  "/page": "app/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js",
   "/admin/customers/page": "app/admin/customers/page.js",
-  "/admin/products/addProduct/page": "app/admin/products/addProduct/page.js",
-  "/admin/products/page": "app/admin/products/page.js",
   "/admin/products/editMilktea/[id]/page": "app/admin/products/editMilktea/[id]/page.js",
-  "/admin/admins/page": "app/admin/admins/page.js"
+  "/(auth)/signup/page": "app/(auth)/signup/page.js"
 }

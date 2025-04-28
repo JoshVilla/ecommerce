@@ -69,7 +69,7 @@ export default function AdminLayout({
             </BreadcrumbList>
           </Breadcrumb>
         </header>
-        <div className="p-4">{children}</div>
+        <div className="p-4 h-full bg-[#fff]">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );

@@ -89,12 +89,13 @@ const Page = () => {
           variant="link"
           onClick={() => router.push("/admin/products/addProduct")}
           className="hover:underline cursor-pointer"
+          size="sm"
         >
           <Plus />
           Add Product
         </Button>
 
-        <div>
+        <div className="p-2 mt-4">
           <Table>
             <TableHeader>
               <TableRow>

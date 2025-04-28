@@ -22,6 +22,7 @@ import {
 import { useDispatch } from "react-redux";
 import { persistor } from "@/redux/store/store";
 import { clearUser } from "@/redux/slices/userSlice";
+import { DoorOpen, ShoppingCart, User } from "lucide-react";
 
 const Navbar = () => {
   const router = useRouter();
@@ -51,12 +52,12 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-sky-500 py-2 px-6 flex items-center justify-between">
+    <div className="bg-black py-2 px-6 flex items-center justify-between">
       <div
         className="text-xl text-white font-semibold cursor-pointer"
         onClick={() => router.push("/")}
       >
-        Milktea
+        Bobaville
       </div>
       <div className="text-white">
         {loading ? null : tokenInfo?.name ? (
@@ -67,16 +68,19 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem className="cursor-pointer">
-                  Profile
+                  <User /> Profile
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer">
-                  My Store
+                  <ShoppingCart /> My Cart
                 </DropdownMenuItem>
+                {/* <DropdownMenuItem className="cursor-pointer">
+                  My Store
+                </DropdownMenuItem> */}
                 <DropdownMenuItem
                   className="cursor-pointer"
                   onClick={() => setOpenDialog(true)}
                 >
-                  Logout
+                  <DoorOpen /> Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

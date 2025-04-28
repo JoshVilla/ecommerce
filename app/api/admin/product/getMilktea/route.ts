@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     const { id } = await req.json();
 
     const params: any = {};
-    if (id) params.id = id;
+    if (id) params._id = id;
 
     const products = await Milktea.find(params);
 

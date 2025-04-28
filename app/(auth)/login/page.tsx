@@ -17,7 +17,7 @@ function Page() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <TitlePage title="Login" className="mb-10" hasBack />
+      <TitlePage title="Login" className="mb-10" />
 
       <Tabs
         value={active}

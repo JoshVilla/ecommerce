@@ -96,7 +96,7 @@ function UserLogin() {
           <div className="text-sm text-gray-700 ">
             Dont have an account?
             <span
-              className="cursor-pointer hover:underline"
+              className="cursor-pointer hover:underline text-gray-950"
               onClick={() => router.push("/signup")}
             >
               {" "}
