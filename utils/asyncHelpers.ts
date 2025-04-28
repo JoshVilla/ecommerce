@@ -24,7 +24,7 @@ export const replaceNewImagefromCurrentImage = async (
 ) => {
   try {
     await connectToDatabase();
-    const res = await collection.findById(id); // Use findById instead of find
+    const res = await collection.findById(id);
 
     if (res) {
       const publicId = getCloudinaryPublicId(res.imageUrl);
