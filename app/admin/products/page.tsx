@@ -3,7 +3,7 @@ import TitlePage from "@/components/titlePage";
 import { Button } from "@/components/ui/button";
 import { getMilktea } from "@/service/api";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, Pencil, Plus, Trash } from "lucide-react";
+import { Loader2, Pencil, Plus, Tag, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import {
@@ -93,6 +93,16 @@ const Page = () => {
         >
           <Plus />
           Add Product
+        </Button>
+
+        <Button
+          variant="link"
+          onClick={() => router.push("/admin/products/taggedProducts")}
+          className="hover:underline cursor-pointer"
+          size="sm"
+        >
+          <Tag />
+          Tagged Products
         </Button>
 
         <div className="p-2 mt-4">

@@ -31,20 +31,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/admin/layout.js"
     ],
+    "/admin/loading": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/admin/loading.js"
+    ],
     "/admin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/admin/page.js"
-    ],
-    "/admin/admins/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/admin/admins/page.js"
-    ],
-    "/api/admin/getAdmin/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/admin/getAdmin/route.js"
     ],
     "/admin/products/loading": [
       "static/chunks/webpack.js",
@@ -61,35 +56,35 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/admin/product/getMilktea/route.js"
     ],
-    "/admin/products/editMilktea/[id]/page": [
+    "/admin/admins/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/admin/products/editMilktea/[id]/page.js"
+      "static/chunks/app/admin/admins/page.js"
     ],
-    "/admin/customers/page": [
+    "/api/admin/getAdmin/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/admin/customers/page.js"
+      "static/chunks/app/api/admin/getAdmin/route.js"
     ],
-    "/api/admin/customers/route": [
+    "/admin/products/addProduct/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/admin/customers/route.js"
+      "static/chunks/app/admin/products/addProduct/page.js"
     ],
-    "/(auth)/signup/layout": [
+    "/admin/settings/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(auth)/signup/layout.js"
+      "static/chunks/app/admin/settings/layout.js"
     ],
-    "/(auth)/signup/page": [
+    "/admin/settings/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(auth)/signup/page.js"
+      "static/chunks/app/admin/settings/page.js"
     ],
-    "/api/login/route": [
+    "/admin/products/taggedProducts/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/api/login/route.js"
+      "static/chunks/app/admin/products/taggedProducts/page.js"
     ]
   }
 }

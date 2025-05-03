@@ -158,7 +158,7 @@ export default function AddProductForm() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <TitlePage title="Add Product" />
+      <TitlePage title="Add Product" hasBack />
       <div className="mt-6">
         <Form {...form}>
           <form
