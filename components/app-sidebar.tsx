@@ -35,6 +35,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { clearAdmin } from "@/redux/slices/adminSlice";
 import { IAdmin } from "@/utils/types";
 import Link from "next/link";
+import { clearMilktea } from "@/redux/slices/milkteaSlice";
 
 // This is sample data.
 const data = {
@@ -99,6 +100,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       await persistor.purge();
       localStorage.removeItem("token");
       dispatch(clearAdmin());
+      dispatch(clearMilktea());
       router.push("/login");
     } catch (error) {
       console.error("Logout error:", error);

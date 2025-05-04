@@ -56,35 +56,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/admin/product/getMilktea/route.js"
     ],
-    "/admin/admins/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/admin/admins/page.js"
-    ],
-    "/api/admin/getAdmin/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/admin/getAdmin/route.js"
-    ],
-    "/admin/products/addProduct/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/admin/products/addProduct/page.js"
-    ],
-    "/admin/settings/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/admin/settings/layout.js"
-    ],
-    "/admin/settings/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/admin/settings/page.js"
-    ],
     "/admin/products/taggedProducts/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/admin/products/taggedProducts/page.js"
+    ],
+    "/api/admin/product/getTaggedMilktea/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/admin/product/getTaggedMilktea/route.js"
+    ],
+    "/api/admin/product/tagMilktea/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/admin/product/tagMilktea/route.js"
     ]
   }
 }

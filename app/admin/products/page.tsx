@@ -5,7 +5,7 @@ import { getMilktea } from "@/service/api";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2, Pencil, Plus, Tag, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -18,12 +18,15 @@ import {
 import { IMilktea } from "@/models/milkteaModel";
 import DeleteMilktea from "./deleteMilktea";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { setMilktea } from "@/redux/slices/milkteaSlice";
 
 export interface INewMilktea extends IMilktea {
   _id: string;
 }
 
 const Page = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const { data, isLoading, refetch } = useQuery({
@@ -76,6 +79,10 @@ const Page = () => {
       </TableRow>
     ));
   };
+
+  useEffect(() => {
+    dispatch(setMilktea(data?.data));
+  }, [data]);
 
   return (
     <motion.div

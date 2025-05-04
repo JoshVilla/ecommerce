@@ -1,8 +1,9 @@
 {
-  "/api/admin/product/getMilktea/route": "app/api/admin/product/getMilktea/route.js",
-  "/admin/products/addProduct/page": "app/admin/products/addProduct/page.js",
-  "/admin/products/page": "app/admin/products/page.js",
-  "/admin/admins/page": "app/admin/admins/page.js",
+  "/api/admin/product/getTaggedMilktea/route": "app/api/admin/product/getTaggedMilktea/route.js",
+  "/api/admin/product/tagMilktea/route": "app/api/admin/product/tagMilktea/route.js",
+  "/page": "app/page.js",
+  "/admin/page": "app/admin/page.js",
   "/admin/products/taggedProducts/page": "app/admin/products/taggedProducts/page.js",
-  "/admin/settings/page": "app/admin/settings/page.js"
+  "/admin/products/page": "app/admin/products/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js"
 }
