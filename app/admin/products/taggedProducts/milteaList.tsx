@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Check, Plus } from "lucide-react";
+import { Check, Loader2, Plus } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import { INewMilktea } from "../page";
@@ -145,8 +145,16 @@ const MilkteaList = ({ category, defaultItems, refetch }: Props) => {
             className="cursor-pointer"
             size="sm"
             onClick={onSave}
+            disabled={updateMutation.isPending}
           >
-            Save
+            {updateMutation.isPending ? (
+              <span className="flex items-center gap-2">
+                {" "}
+                <Loader2 className="animate-spin" /> Saving
+              </span>
+            ) : (
+              "Save"
+            )}
           </Button>
         </DialogFooter>
       </DialogContent>

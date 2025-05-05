@@ -47,7 +47,7 @@ const TaggedProducts = () => {
     <Container>
       <TitlePage title="Tagged Products" hasBack />
       <div className="mt-6">
-        <div className="grid grid-cols-2 grid-rows-5 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 grid-rows-5 gap-4">
           <div className="row-span-2 p-4">
             <div className="flex items-center justify-between mb-2">
               {" "}
@@ -88,6 +88,11 @@ const TaggedProducts = () => {
               />
             </div>
             <Separator />
+            <div className="my-4 space-y-3">
+              {bestSellerData.map((product: IProduct, idx: number) => (
+                <div key={idx}>{product.name}</div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
