@@ -70,6 +70,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/admin/product/tagMilktea/route.js"
+    ],
+    "/admin/products/editMilktea/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/admin/products/editMilktea/[id]/page.js"
     ]
   }
 }

@@ -3,7 +3,7 @@ import Container from "@/components/container";
 import TitlePage from "@/components/titlePage";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Info, Plus } from "lucide-react";
+import { Info, Loader2, Plus } from "lucide-react";
 
 import React, { useEffect, useState } from "react";
 import MilkteaList from "./milteaList";
@@ -43,6 +43,32 @@ const TaggedProducts = () => {
     }
   }, [data]);
 
+  const renderList = (data: IProduct[]) => {
+    if (isLoading) {
+      return (
+        <div className="flex gap-2 items-center justify-center my-10">
+          <Loader2 className="animate-spin" width={20} /> Getting Data
+        </div>
+      );
+    }
+
+    if (data.length === 0) {
+      return (
+        <div className="text-gray-500 text-center my-10 text-sm">
+          No Product Added
+        </div>
+      );
+    }
+
+    return (
+      <div className="my-4 space-y-3">
+        {data.map((product: IProduct) => (
+          <div key={product.id ?? product.name}>{product.name}</div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <Container>
       <TitlePage title="Tagged Products" hasBack />
@@ -65,11 +91,7 @@ const TaggedProducts = () => {
               />
             </div>
             <Separator />
-            <div className="my-4 space-y-3">
-              {newProductsData.map((product: IProduct, idx: number) => (
-                <div key={idx}>{product.name}</div>
-              ))}
-            </div>
+            {renderList(newProductsData)}
           </div>
           <div className="row-span-2 p-4">
             <div className="flex items-center justify-between mb-2">
@@ -88,11 +110,7 @@ const TaggedProducts = () => {
               />
             </div>
             <Separator />
-            <div className="my-4 space-y-3">
-              {bestSellerData.map((product: IProduct, idx: number) => (
-                <div key={idx}>{product.name}</div>
-              ))}
-            </div>
+            {renderList(bestSellerData)}
           </div>
         </div>
       </div>
