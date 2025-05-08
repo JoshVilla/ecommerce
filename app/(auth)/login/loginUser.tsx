@@ -45,7 +45,7 @@ function UserLogin() {
       if (data.isSuccess) {
         toast.success("Login successful!");
         localStorage.setItem("token", data.token);
-        router.push("/");
+        router.push("/shop");
         dispatch(setUser(data.user));
       } else {
         toast.error(data.message);

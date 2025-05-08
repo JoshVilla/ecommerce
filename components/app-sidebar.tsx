@@ -37,60 +37,25 @@ import { IAdmin } from "@/utils/types";
 import Link from "next/link";
 import { clearMilktea } from "@/redux/slices/milkteaSlice";
 
-// This is sample data.
-const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-  navMain: [
-    {
-      title: "Menu",
-      url: "#",
-      items: [
-        {
-          title: "Dashboard",
-          url: "/admin/",
-        },
-        {
-          title: "Products",
-          url: "/admin/products",
-        },
-        {
-          title: "Order",
-          url: "#",
-        },
-        {
-          title: "Customers",
-          url: "/admin/customers",
-        },
-        {
-          title: "Settings",
-          url: "/admin/settings",
-        },
-        {
-          title: "Analytics",
-          url: "#",
-        },
-        {
-          title: "Promotions",
-          url: "#",
-        },
-        {
-          title: "Inventory",
-          url: "#",
-        },
-        {
-          title: "Admins",
-          url: "/admin/admins",
-        },
-      ],
-    },
-  ],
+type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
+  navMain: {
+    title: string;
+    items: {
+      title: string;
+      url: string;
+    }[];
+  }[];
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ navMain, ...props }: AppSidebarProps) {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
-  console.log(pathname);
+
+  const data = {
+    versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
+    navMain: navMain,
+  };
   const state = useSelector((state: RootState) => state.admin.admin as IAdmin);
   const [loadingLogout, setLoadingLogout] = useState(false);
   const handleLogout = async () => {

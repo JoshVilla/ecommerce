@@ -6,10 +6,20 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/page": [
+    "/(user)/shop/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/(user)/shop/layout.js"
+    ],
+    "/(user)/shop/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(user)/shop/page.js"
+    ],
+    "/api/admin/product/getMilktea/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/admin/product/getMilktea/route.js"
     ],
     "/(auth)/login/layout": [
       "static/chunks/webpack.js",
@@ -51,30 +61,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/admin/products/page.js"
     ],
-    "/api/admin/product/getMilktea/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/admin/product/getMilktea/route.js"
-    ],
-    "/admin/products/taggedProducts/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/admin/products/taggedProducts/page.js"
-    ],
-    "/api/admin/product/getTaggedMilktea/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/admin/product/getTaggedMilktea/route.js"
-    ],
-    "/api/admin/product/tagMilktea/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/admin/product/tagMilktea/route.js"
-    ],
     "/admin/products/editMilktea/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/admin/products/editMilktea/[id]/page.js"
+    ],
+    "/api/admin/product/editMilktea/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/admin/product/editMilktea/route.js"
+    ],
+    "/api/login/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/login/route.js"
     ]
   }
 }
