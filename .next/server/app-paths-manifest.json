@@ -1,8 +1,0 @@
-{
-  "/api/admin/product/getMilktea/route": "app/api/admin/product/getMilktea/route.js",
-  "/(user)/shop/page": "app/(user)/shop/page.js",
-  "/(auth)/login/page": "app/(auth)/login/page.js",
-  "/admin/page": "app/admin/page.js",
-  "/admin/products/editMilktea/[id]/page": "app/admin/products/editMilktea/[id]/page.js",
-  "/admin/products/page": "app/admin/products/page.js"
-}
