@@ -32,10 +32,10 @@ import { DoorOpen } from "lucide-react";
 import { persistor, RootState } from "@/redux/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname, useRouter } from "next/navigation";
-import { clearAdmin } from "@/redux/slices/adminSlice";
-import { IAdmin } from "@/utils/types";
+import {IAdmin, IUser} from "@/utils/types";
 import Link from "next/link";
 import { clearMilktea } from "@/redux/slices/milkteaSlice";
+import {clearUser} from "@/redux/slices/userSlice";
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   navMain: {
@@ -56,7 +56,7 @@ export function AppSidebar({ navMain, ...props }: AppSidebarProps) {
     versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
     navMain: navMain,
   };
-  const state = useSelector((state: RootState) => state.admin.admin as IAdmin);
+  const state = useSelector((state: RootState) => state.user.user as IUser);
   const [loadingLogout, setLoadingLogout] = useState(false);
   const handleLogout = async () => {
     setLoadingLogout(true);
@@ -64,7 +64,7 @@ export function AppSidebar({ navMain, ...props }: AppSidebarProps) {
       await persistor.flush();
       await persistor.purge();
       localStorage.removeItem("token");
-      dispatch(clearAdmin());
+      dispatch(clearUser());
       dispatch(clearMilktea());
       router.push("/login");
     } catch (error) {
@@ -107,7 +107,7 @@ export function AppSidebar({ navMain, ...props }: AppSidebarProps) {
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <div>{state.username}</div>
+            <div className="text-sm">{`${state.firstname} ${state.middlename.charAt(0)}. ${state.lastname}`}</div>
           </div>
           <AlertDialog>
             <AlertDialogTrigger asChild>
