@@ -8,16 +8,28 @@ import { getMilktea } from "@/service/api";
 import { useQuery } from "@tanstack/react-query";
 import { Heart, ShoppingBag, ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MilkteaInfo from "./milkteaInfo";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
+import { IMyOrders } from "@/utils/types";
+import { Badge } from "@/components/ui/badge";
 
 const Page = () => {
+  const state = useSelector(
+    (state: RootState) => state.myOrders.myOrders as IMyOrders[]
+  );
+  const [countOrders, setCountOrders] = useState(0);
   const { data, isLoading } = useQuery({
     queryKey: ["all-products"],
     queryFn: () => getMilktea({}),
   });
 
   const milkteas = data?.data ?? [];
+
+  useEffect(() => {
+    setCountOrders(state.length);
+  }, [state]);
 
   return (
     <Container>
@@ -57,6 +69,16 @@ const Page = () => {
           </div>
         )}
       </div>
+
+      {/* Cart Widget */}
+      <Button className="absolute bottom-0 right-4">
+        <div className="relative">
+          <ShoppingBag className="w-6 h-6" />
+          <Badge className="absolute -top-2 -right-3 px-1.5 py-0 text-xs rounded-full bg-white text-black">
+            {countOrders}
+          </Badge>
+        </div>
+      </Button>
     </Container>
   );
 };

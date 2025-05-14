@@ -15,12 +15,15 @@ import { ShoppingCart } from "lucide-react";
 import { INewMilktea } from "@/app/admin/products/page";
 import Image from "next/image";
 import { toast } from "sonner";
+import { useDispatch } from "react-redux";
+import { clearMyOrders, addToMyOrders } from "@/redux/slices/myOrdersSlice";
 
 interface Props {
   record: INewMilktea;
 }
 
 const MilkteaInfo = ({ record }: Props) => {
+  const dispatch = useDispatch();
   const [btnSizeActive, setBtnSizeActive] = useState<number | null>(null);
   const [btnSugarLevelActive, setBtnSugarLevelActive] = useState<number | null>(
     null
@@ -61,6 +64,7 @@ const MilkteaInfo = ({ record }: Props) => {
 
     console.log("Order added to cart:", finalOrder);
     toast.success("Added to cart!");
+    dispatch(addToMyOrders(finalOrder));
   };
 
   return (

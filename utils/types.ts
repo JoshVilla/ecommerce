@@ -28,3 +28,12 @@ export interface IAdmin {
   username: string;
   status: string;
 }
+
+export interface IMyOrders {
+  addon?: number;
+  product: string;
+  quantity: number;
+  sizePrice: number;
+  sugarPrice: number;
+  total: number;
+}

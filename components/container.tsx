@@ -11,6 +11,7 @@ const Container = ({ children }: ContainerProps) => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      className="relative h-full w-full"
     >
       {children}
     </motion.div>
