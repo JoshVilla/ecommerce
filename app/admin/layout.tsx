@@ -20,19 +20,23 @@ import {
 } from "@/components/ui/sidebar";
 import React from "react";
 import { navMain } from "./sidebarProps";
+import {useSelector} from "react-redux";
+import {RootState} from "@/redux/store/store";
+import {IAdmin} from "@/utils/types";
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const state = useSelector((state: RootState) => state.admin.admin as IAdmin);
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
   const breadcrumbs = segments[0] === "admin" ? segments.slice(1) : segments;
 
   return (
     <SidebarProvider>
-      <AppSidebar navMain={navMain} />
+      <AppSidebar navMain={navMain} state={state} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />

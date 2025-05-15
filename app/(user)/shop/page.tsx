@@ -33,31 +33,34 @@ const Page = () => {
         ) : (
           <div className="flex items-center gap-6 flex-wrap">
             {milkteas.map((milktea: INewMilktea):ReactNode => (
-              <div key={milktea._id} className="w-40 h-72">
-                <div className="border h-50 w-40 relative">
-                  <Image
-                    src={milktea.imageUrl}
-                    alt={milktea.name}
-                    fill
-                    className="object-cover rounded"
-                  />
-                </div>
-                <div className="mt-4">{milktea.name}</div>
-                <div className="text-gray-500 text-xs line-clamp-2 overflow-hidden">
-                  {milktea.description}
-                </div>
-                <div className="mt-4 space-x-3">
-                  <MilkteaInfo record={milktea} />
+                <div key={milktea._id} className="w-40 h-80 flex flex-col justify-between">
+                    <div>
+                        <div className="border h-50 w-40 relative">
+                            <Image
+                                src={milktea.imageUrl}
+                                alt={milktea.name}
+                                fill
+                                className="object-cover rounded"
+                            />
+                        </div>
+                        <div className="mt-4 font-semibold">{milktea.name}</div>
+                        <div className="text-gray-500 text-xs line-clamp-2 overflow-hidden">
+                            {milktea.description}
+                        </div>
+                    </div>
 
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="cursor-pointer"
-                  >
-                    <Heart />
-                  </Button>
+                    <div className="mt-4 space-x-3">
+                        <MilkteaInfo record={milktea} />
+                        <Button
+                            size="sm"
+                            variant="outline"
+                            className="cursor-pointer"
+                        >
+                            <Heart />
+                        </Button>
+                    </div>
                 </div>
-              </div>
+
             ))}
           </div>
         )}

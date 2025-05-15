@@ -23,7 +23,7 @@ import { navMain } from "./sidebarProps";
 import {Button} from "@/components/ui/button";
 import {useSelector} from "react-redux";
 import {RootState} from "@/redux/store/store";
-import {IMyOrders} from "@/utils/types";
+import {IMyOrders, IUser} from "@/utils/types";
 import {ShoppingBag} from "lucide-react";
 import {Badge} from "@/components/ui/badge";
 
@@ -33,6 +33,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter()
+  const userState = useSelector((state: RootState) => state.user.user as IUser)
   const state = useSelector((state:RootState) => state.myOrders.myOrders as IMyOrders[]);
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
@@ -47,7 +48,7 @@ export default function AdminLayout({
   },[state])
   return (
     <SidebarProvider>
-      <AppSidebar navMain={navMain} />
+      <AppSidebar navMain={navMain} state={userState}/>
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center justify-between border-b px-4">
           <div className="flex items-center gap-2">
