@@ -36,8 +36,28 @@ const myOrdersSlice = createSlice({
     clearMyOrders: (state) => {
       state.myOrders = [];
     },
+    removeOrder: (state, action: PayloadAction<string>) => {
+     state.myOrders =  state.myOrders.filter((order:IMyOrders) => order.id !== action.payload);
+    },
+    updateQuantity: (
+        state,
+        action: PayloadAction<{ id: string; newQuantity: number }>
+    ) => {
+      const { id, newQuantity } = action.payload;
+      const order = state.myOrders.find((order) => order.id === id);
+
+      if (order) {
+        order.quantity = newQuantity;
+        const baseTotal:number =
+            (Number(order.sizePrice) || 0) +
+            (Number(order.sugar)|| 0) +
+            (Number(order.addonPrice) || 0);
+        order.total = baseTotal * newQuantity;
+      }
+    }
+
   },
 });
 
-export const { addToMyOrders, clearMyOrders } = myOrdersSlice.actions;
+export const { addToMyOrders, clearMyOrders, removeOrder, updateQuantity } = myOrdersSlice.actions;
 export default myOrdersSlice.reducer;

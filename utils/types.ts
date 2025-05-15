@@ -30,10 +30,16 @@ export interface IAdmin {
 }
 
 export interface IMyOrders {
-  addon?: number;
+  id: string;
+  addonPrice?: number;
   product: string;
   quantity: number;
   sizePrice: number;
   sugarPrice: number;
   total: number;
+  size: string
+  addon?: string
+  description: string;
+  image: string;
+  sugar: string
 }
