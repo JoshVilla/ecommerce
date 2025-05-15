@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {useEffect, useMemo} from "react";
 import Container from "@/components/container";
 import TitlePage from "@/components/titlePage";
 import Image from "next/image";
@@ -11,6 +11,7 @@ import { RootState } from "@/redux/store/store";
 import { IMyOrders } from "@/utils/types";
 import { Trash2 } from "lucide-react";
 import { removeOrder, updateQuantity } from "@/redux/slices/myOrdersSlice";
+import {Separator} from "@/components/ui/separator";
 
 const Page = () => {
     const orderList = useSelector(
@@ -28,6 +29,15 @@ const Page = () => {
             dispatch(updateQuantity({ id, newQuantity }));
         }
     };
+
+    const grandTotal: number = useMemo(() => {
+        let total = 0
+        orderList.forEach((order: IMyOrders) => {
+            total += order.total
+        })
+        return total
+    }, [orderList]);
+
 
     return (
         <Container>
@@ -84,6 +94,12 @@ const Page = () => {
                         </div>
                     </div>
                 ))}
+                <div className="border-2 p-4">
+                    <div className="text-lg font-bold">Total: P{grandTotal.toFixed(2)}</div>
+                    <div>Delivery Fee: 20</div>
+                    <Separator />
+                    <div className="text-lg font-bold mt-4">Grand Total: {grandTotal + 20}</div>
+                </div>
             </div>
         </Container>
     );

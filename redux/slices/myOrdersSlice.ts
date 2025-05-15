@@ -20,7 +20,7 @@ const myOrdersSlice = createSlice({
         (order) =>
           order.product === newOrder.product &&
           order.sizePrice === newOrder.sizePrice &&
-          order.sugarPrice === newOrder.sugarPrice &&
+          order.sugar === newOrder.sugar &&
           order.addon === newOrder.addon
       );
 
