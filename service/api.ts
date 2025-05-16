@@ -51,3 +51,15 @@ export const getTaggedMilktea = async (params: any): Promise<any> => {
 export const addUserAddress = async (params: any): Promise<any> => {
   return await post("/api/user/address/addAddress", params);
 };
+
+export const getUserAddress = async (params: any): Promise<any> => {
+  return await post("/api/user/address", params);
+};
+
+export const deleteUserAddress = async (params: any): Promise<any> => {
+  return await post("/api/user/address/deleteAddress", params);
+};
+
+export const setDefaultAddress = async (params: any): Promise<any> => {
+  return await post("/api/user/address/setDefaultAddress", params);
+};

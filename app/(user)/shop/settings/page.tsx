@@ -1,16 +1,16 @@
-"use client"
-import React from "react"
+"use client";
+import React from "react";
 import TitlePage from "@/components/titlePage";
-import {Info} from "lucide-react";
-import Address from "@/app/(user)/shop/settings/components/address";
+import { Info } from "lucide-react";
+import Address from "@/app/(user)/shop/settings/components/address/address";
 
 const Page = () => {
-    return(
-        <div>
-            <TitlePage title="Settings" />
-           <Address />
-        </div>
-    )
-}
+  return (
+    <div>
+      <TitlePage title="Settings" />
+      <Address />
+    </div>
+  );
+};
 
-export default Page
+export default Page;

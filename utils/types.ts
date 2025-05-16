@@ -1,3 +1,5 @@
+import { IAddressModel } from "@/models/addressModel";
+
 export interface IApiResponse<T> {
   data: T;
   isSuccess?: boolean;
@@ -37,9 +39,13 @@ export interface IMyOrders {
   sizePrice: number;
   sugarPrice: number;
   total: number;
-  size: string
-  addon?: string
+  size: string;
+  addon?: string;
   description: string;
   image: string;
-  sugar: string
+  sugar: string;
+}
+
+export interface INewAddress extends IAddressModel {
+  _id: string;
 }
