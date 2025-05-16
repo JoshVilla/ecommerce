@@ -51,12 +51,12 @@ export default function AdminLayout({
     setCountMyOrders(state.length);
   }, [state]);
 
-  useEffect(() => {
-    if (Object.keys(userState).length === 0) {
-      dispatch(clearUser());
-      router.push("/");
-    }
-  }, [userState, dispatch, router]);
+  // useEffect(() => {
+  //   if (Object.keys(userState).length === 0) {
+  //     dispatch(clearUser());
+  //     router.push("/");
+  //   }
+  // }, [userState, dispatch, router]);
 
   return (
     <SidebarProvider>

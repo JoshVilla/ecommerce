@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { setUser } from "@/redux/slices/userSlice";
+import { fetchUserInfo, setUser } from "@/redux/slices/userSlice";
 import { motion } from "framer-motion";
 import TitlePage from "@/components/titlePage";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -46,7 +46,9 @@ function UserLogin() {
         toast.success("Login successful!");
         localStorage.setItem("token", data.token);
         router.push("/shop");
-        dispatch(setUser(data.user));
+        // dispatch(setUser(data.user));
+        // console.log(data.user);
+        dispatch(fetchUserInfo(data.user._id) as any);
       } else {
         toast.error(data.message);
       }

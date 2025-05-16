@@ -32,7 +32,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import { INewAddress, IUser } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -50,8 +50,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { dispatchSetDefaultAddress } from "@/redux/slices/userSlice";
 
 const Address = () => {
+  const dispatch = useDispatch();
   const userState = useSelector((state: RootState) => state.user.user as IUser);
   const userId = userState?._id;
 
@@ -159,6 +161,9 @@ const Address = () => {
       if (data.isSuccess) {
         toast.success(data.message);
         refetch();
+
+        //update default address in redux
+        dispatch(dispatchSetDefaultAddress(data.data));
       } else {
         toast.error(data.message);
       }
@@ -202,6 +207,68 @@ const Address = () => {
     didMountCity.current = false;
     didMountProvince.current = false;
     didMountRegion.current = false;
+  };
+
+  const renderAddressList = () => {
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
+
+    if (!data) {
+      return <div>No address found.</div>;
+    }
+    return data?.data.map((address: INewAddress, index: number) => (
+      <div className="border w-full p-4 mt-4 space-y-2" key={index}>
+        {address.isDefaultAddress && <Badge>Default</Badge>}
+        <div className="text-sm text-gray-600">
+          {`${address.region}, ${address.province}, ${address.city}, ${address.barangay}`}
+        </div>
+        <div className="text-sm text-gray-600">{`${address.otherAddress}`}</div>
+        <div className="text-sm text-gray-600">{`${address.addressInfo}`}</div>
+        <div className="flex justify-end gap-2">
+          {" "}
+          {/* <EditAddress record={address} /> */}
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="cursor-pointer hover:scale-105 text-blue-400"
+                  onClick={() => handleUpdateDefaultAddress(address._id)}
+                >
+                  <LocateIcon />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Set to default address</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="cursor-pointer hover:scale-105 text-red-400"
+                  onClick={() => handleDeleteAddress(address._id)}
+                >
+                  <Trash2 />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Delete address</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+      </div>
+    ));
   };
 
   return (
@@ -401,60 +468,7 @@ const Address = () => {
         </div>
       </div>
       <div>List of Address</div>
-      <div>
-        {data?.data.map((address: INewAddress, index: number) => (
-          <div className="border w-full p-4 mt-4 space-y-2" key={index}>
-            {address.isDefaultAddress && <Badge>Default</Badge>}
-            <div className="text-sm text-gray-600">
-              {`${address.region}, ${address.province}, ${address.city}, ${address.barangay}`}
-            </div>
-            <div className="text-sm text-gray-600">
-              {`${address.otherAddress}`}
-            </div>
-            <div className="text-sm text-gray-600">
-              {`${address.addressInfo}`}
-            </div>
-            <div className="flex justify-end gap-2">
-              {" "}
-              {/* <EditAddress record={address} /> */}
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="cursor-pointer hover:scale-105 text-blue-400"
-                      onClick={() => handleUpdateDefaultAddress(address._id)}
-                    >
-                      <LocateIcon />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Set to default address</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="cursor-pointer hover:scale-105 text-red-400"
-                      onClick={() => handleDeleteAddress(address._id)}
-                    >
-                      <Trash2 />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Delete address</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
-          </div>
-        ))}
-      </div>
+      <div>{renderAddressList()}</div>
     </div>
   );
 };

@@ -55,7 +55,6 @@ const EditAddress = ({ record }: Props) => {
             onChange={(e) => handleChange("addressInfo", e.target.value)}
             placeholder="Additional Info or Landmark"
           />
-          {/* You can add more fields here if needed */}
           <div className="flex justify-end gap-2">
             <Button variant="outline" onClick={() => setOpenDialog(false)}>
               Cancel

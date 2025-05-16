@@ -1,8 +1,16 @@
-import { getDecodedToken } from "@/utils/nonAsyncHelpers";
-import { JwtPayload } from "jsonwebtoken";
+"use client";
+
 import React, { useEffect, useState } from "react";
-import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { JwtPayload } from "jsonwebtoken";
+import { DoorOpen, ShoppingCart, User } from "lucide-react";
+
+import { getDecodedToken } from "@/utils/nonAsyncHelpers";
+import { persistor } from "@/redux/store/store";
+import { clearUser } from "@/redux/slices/userSlice";
+
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,15 +27,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { useDispatch } from "react-redux";
-import { persistor } from "@/redux/store/store";
-import { clearUser } from "@/redux/slices/userSlice";
-import { DoorOpen, ShoppingCart, User } from "lucide-react";
 
 const Navbar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
   const [tokenInfo, setTokenInfo] = useState<JwtPayload | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -39,32 +44,41 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
+      setLoggingOut(true);
       await persistor.flush();
       await persistor.purge();
-      localStorage.removeItem("token"); // or however you're storing the token
-      setTokenInfo(null);
-      setOpenDialog(false);
-      router.push("/");
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("token");
+      }
       dispatch(clearUser());
+      router.push("/");
     } catch (error) {
       console.log(error);
+    } finally {
+      setOpenDialog(false);
+      setLoggingOut(false);
     }
   };
 
   return (
-    <div className="bg-black py-2 px-6 flex items-center justify-between">
+    <nav className="bg-black py-2 px-6 flex items-center justify-between">
       <div
         className="text-xl text-white font-semibold cursor-pointer"
         onClick={() => router.push("/")}
       >
         Bobaville
       </div>
+
       <div className="text-white">
-        {loading ? null : tokenInfo?.name ? (
+        {loading ? (
+          <div className="text-sm text-gray-400 animate-pulse">Loading...</div>
+        ) : tokenInfo?.name ? (
           <>
             <DropdownMenu>
-              <DropdownMenuTrigger className="cursor-pointer hover:underline">
-                Hello, {tokenInfo.name}
+              <DropdownMenuTrigger asChild>
+                <button className="cursor-pointer hover:underline">
+                  Hello, {tokenInfo.name}
+                </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem className="cursor-pointer">
@@ -73,9 +87,6 @@ const Navbar = () => {
                 <DropdownMenuItem className="cursor-pointer">
                   <ShoppingCart /> My Cart
                 </DropdownMenuItem>
-                {/* <DropdownMenuItem className="cursor-pointer">
-                  My Store
-                </DropdownMenuItem> */}
                 <DropdownMenuItem
                   className="cursor-pointer"
                   onClick={() => setOpenDialog(true)}
@@ -102,8 +113,9 @@ const Navbar = () => {
                   <AlertDialogAction
                     className="cursor-pointer"
                     onClick={handleLogout}
+                    disabled={loggingOut}
                   >
-                    Logout
+                    {loggingOut ? "Logging out..." : "Logout"}
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
@@ -120,7 +132,7 @@ const Navbar = () => {
           </Button>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 

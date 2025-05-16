@@ -63,3 +63,7 @@ export const deleteUserAddress = async (params: any): Promise<any> => {
 export const setDefaultAddress = async (params: any): Promise<any> => {
   return await post("/api/user/address/setDefaultAddress", params);
 };
+
+export const getAccountInfo = async (params: any): Promise<any> => {
+  return await post("/api/user/accountInfo", params);
+};
