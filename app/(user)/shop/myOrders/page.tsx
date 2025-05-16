@@ -12,13 +12,14 @@ import {IMyOrders, IUser} from "@/utils/types";
 import { Trash2 } from "lucide-react";
 import { removeOrder, updateQuantity } from "@/redux/slices/myOrdersSlice";
 import {Separator} from "@/components/ui/separator";
+import {motion, AnimatePresence} from "framer-motion";
 
 const Page = () => {
     const orderList = useSelector(
         (state: RootState) => state.myOrders.myOrders as IMyOrders[]
     );
 
-    const user = useSelector((state: RootState) => state.user.user);
+    const user = useSelector((state: RootState) => state.user.user as IUser);
     const userId = user?._id;
     const dispatch = useDispatch();
 
@@ -49,58 +50,72 @@ const Page = () => {
     }
 
     const renderList = () => {
-        return orderList.length > 0 ? orderList.map((order: IMyOrders, idx: number) => (
-            <div className="flex gap-4" key={idx}>
-                <Image
-                    src={order.image}
-                    alt="milktea"
-                    width={100}
-                    height={100}
-                    className="rounded-md object-cover"
-                />
-                <div className="space-y-2 w-80">
-                    <div className="flex items-center justify-between">
-                        <div className="font-bold text-lg">{order.product}</div>
-                        <div
-                            className="text-red-500 cursor-pointer hover:scale-110"
-                            onClick={() => handleRemoveOrder(order.id)}
-                        >
-                            <Trash2 height={20} />
-                        </div>
-                    </div>
+        return orderList.length > 0 ? (
+            <AnimatePresence>
+                {orderList.map((order: IMyOrders, idx: number) => (
+                    <motion.div
+                        key={order.id} // use stable key
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+                        layout
+                        className="flex gap-4 mb-4"
+                    >
+                        <Image
+                            src={order.image}
+                            alt="milktea"
+                            width={100}
+                            height={100}
+                            className="rounded-md object-cover"
+                        />
+                        <div className="space-y-2 w-80">
+                            <div className="flex items-center justify-between">
+                                <div className="font-bold text-lg">{order.product}</div>
+                                <div
+                                    className="text-red-500 cursor-pointer hover:scale-110"
+                                    onClick={() => handleRemoveOrder(order.id)}
+                                >
+                                    <Trash2 height={20} />
+                                </div>
+                            </div>
 
-                    <div className="flex gap-4 items-center">
-                        <Button
-                            size="sm"
-                            variant="outline"
-                            className="cursor-pointer"
-                            onClick={() =>
-                                handleQuantityChange(order.id, order.quantity - 1)
-                            }
-                            disabled={order.quantity <= 1}
-                        >
-                            <LeftArrow />
-                        </Button>
-                        <span>{order.quantity}</span>
-                        <Button
-                            size="sm"
-                            variant="outline"
-                            className="cursor-pointer"
-                            onClick={() =>
-                                handleQuantityChange(order.id, order.quantity + 1)
-                            }
-                        >
-                            <RightArrow />
-                        </Button>
-                    </div>
-                    <div className="text-xs text-gray-500">{order.description}</div>
-                    <div className="font-semibold text-sm text-green-600">
-                        ₱{order.total.toFixed(2)}
-                    </div>
-                </div>
-            </div>
-        )) : <div className="text-sm text-gray-500">No Order</div>
+                            <div className="flex gap-4 items-center">
+                                <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className="cursor-pointer"
+                                    onClick={() =>
+                                        handleQuantityChange(order.id, order.quantity - 1)
+                                    }
+                                    disabled={order.quantity <= 1}
+                                >
+                                    <LeftArrow />
+                                </Button>
+                                <span>{order.quantity}</span>
+                                <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className="cursor-pointer"
+                                    onClick={() =>
+                                        handleQuantityChange(order.id, order.quantity + 1)
+                                    }
+                                >
+                                    <RightArrow />
+                                </Button>
+                            </div>
+                            <div className="text-xs text-gray-500">{order.description}</div>
+                            <div className="font-semibold text-sm text-green-600">
+                                ₱{order.total.toFixed(2)}
+                            </div>
+                        </div>
+                    </motion.div>
+                ))}
+            </AnimatePresence>
+        ) : (
+            <div className="text-sm text-gray-500">No Order</div>
+        );
     }
+
 
 
     return (

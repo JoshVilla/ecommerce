@@ -9,4 +9,14 @@ export const navMain = [
       },
     ],
   },
+  {
+    title: "Others",
+    url: "#",
+    items: [
+      {
+        title: "Settings",
+        url: "/shop/settings",
+      }
+    ]
+  },
 ];

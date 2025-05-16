@@ -72,12 +72,14 @@ export function AppSidebar({ navMain, state, ...props }: AppSidebarProps) {
   };
 
   const renderName = () => {
-    if ("firstname" in state) {
+    if (state && "firstname" in state) {
       const middleInitial = state.middlename ? `${state.middlename.charAt(0)}.` : "";
       return `${state.firstname} ${middleInitial} ${state.lastname}`;
     }
-    return state.username;
+
+    return state?.username || "Unknown";
   };
+
 
   return (
       <Sidebar {...props}>
