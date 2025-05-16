@@ -45,7 +45,7 @@ export default function AdminLayout({
 
   const [countMyOrders, setCountMyOrders] = useState(0);
 
-  const goToMyOrders = () => router.push("shop/myOrders");
+  const goToMyOrders = () => router.push("/shop/myOrders");
 
   useEffect(() => {
     setCountMyOrders(state.length);

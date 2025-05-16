@@ -47,3 +47,7 @@ export const updateTaggedMilktea = async (params: any): Promise<any> => {
 export const getTaggedMilktea = async (params: any): Promise<any> => {
   return await post("/api/admin/product/getTaggedMilktea", params);
 };
+
+export const addUserAddress = async (params: any): Promise<any> => {
+  return await post("/api/user/address/addAddress", params);
+};

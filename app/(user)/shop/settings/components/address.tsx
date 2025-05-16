@@ -25,8 +25,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
+import { IUser } from "@/utils/types";
+import { useMutation } from "@tanstack/react-query";
+import { addUserAddress } from "@/service/api";
+import { toast } from "sonner";
 
 const Address = () => {
+  const userState = useSelector((state: RootState) => state.user.user as IUser);
+  const userId = userState?._id;
   const [address, setAddress] = useState<IAddress>({
     region: "",
     province: "",
@@ -103,6 +111,57 @@ const Address = () => {
       });
     }
   }, [cityOrMunicipalityCode]);
+
+  const addressMutation = useMutation({
+    mutationFn: addUserAddress,
+    onSuccess: (data) => {
+      if (data.isSuccess) {
+        toast.success(data.message);
+        clearForm();
+      } else {
+        toast.error(data.message);
+      }
+    },
+    onError: (error) => {
+      toast.error("Failed to add address. Please try again.");
+    },
+  });
+
+  const handleSaveAddress = () => {
+    const userAddress = {
+      ...address,
+      userId,
+      isDefaultAddress: false,
+    };
+    addressMutation.mutate({ userAddress });
+  };
+
+  const clearForm = () => {
+    setAddress({
+      region: "",
+      province: "",
+      city: "",
+      barangay: "",
+      addressInfo: "",
+      regionCode: "",
+      provinceCode: "",
+      cityCode: "",
+      barangayCode: "",
+      otherAddress: "",
+    }),
+      setRegionCode(null),
+      setProvinceCode(null),
+      setCityOrMunicipalityCode(null),
+      setBarangayCode(null);
+    setRegions([]),
+      setProvinces([]),
+      setCitiesOrMunicipalities([]),
+      setBarangays([]);
+
+    didMountCity.current = false;
+    didMountProvince.current = false;
+    didMountRegion.current = false;
+  };
 
   return (
     <div className="my-6">
@@ -255,7 +314,7 @@ const Address = () => {
             }
           />
         </div>
-        <Button onClick={() => console.log(address)}>Save Address</Button>
+        <Button onClick={handleSaveAddress}>Add Address</Button>
       </div>
     </div>
   );
