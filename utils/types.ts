@@ -81,3 +81,5 @@ export interface IUserState {
   updatedAt: string;
   __v: number;
 }
+
+export type IUserAddress = IUserState["address"];

@@ -67,3 +67,11 @@ export const setDefaultAddress = async (params: any): Promise<any> => {
 export const getAccountInfo = async (params: any): Promise<any> => {
   return await post("/api/user/accountInfo", params);
 };
+
+export const changePassword = async (params: any): Promise<any> => {
+  return await post("/api/user/changePassword", params);
+};
+
+export const updateUserAccount = async (params: any): Promise<any> => {
+  return await post("/api/user/updateUserAccount", params);
+};

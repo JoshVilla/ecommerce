@@ -35,6 +35,10 @@ const userSlice = createSlice({
       //@ts-ignore
       state.user.address = action.payload;
     },
+    dispatchChangePassword: (state, action: PayloadAction<string>) => {
+      //@ts-ignore
+      state.user.password = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
@@ -43,6 +47,10 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser, dispatchSetDefaultAddress } =
-  userSlice.actions;
+export const {
+  setUser,
+  clearUser,
+  dispatchSetDefaultAddress,
+  dispatchChangePassword,
+} = userSlice.actions;
 export default userSlice.reducer;

@@ -37,6 +37,7 @@ import Link from "next/link";
 import { clearMilktea } from "@/redux/slices/milkteaSlice";
 import { clearUser } from "@/redux/slices/userSlice";
 import { clearAdmin } from "@/redux/slices/adminSlice";
+import { clearMyOrders } from "@/redux/slices/myOrdersSlice";
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   navMain: {
@@ -55,15 +56,26 @@ export function AppSidebar({ navMain, state, ...props }: AppSidebarProps) {
   const pathname = usePathname();
   const [loadingLogout, setLoadingLogout] = useState(false);
 
+  const clearAllSlices = () => {
+    dispatch(clearAdmin());
+    dispatch(clearUser());
+    dispatch(clearMilktea());
+    dispatch(clearMyOrders());
+  };
+
+  const clearAllSlicesAndRedirect = () => {
+    clearAllSlices();
+    localStorage.removeItem("token");
+    router.push("/login");
+  };
+
   const handleLogout = async () => {
     setLoadingLogout(true);
     try {
       await persistor.purge();
-      dispatch(clearAdmin());
-      dispatch(clearUser());
-      dispatch(clearMilktea());
-      localStorage.removeItem("token");
-      router.push("/login");
+      setTimeout(() => {
+        clearAllSlicesAndRedirect();
+      }, 2000); // Delay for 2 seconds before clearing the state and redirecting to /log
     } catch (error) {
       console.error("Logout error:", error);
     } finally {
@@ -73,75 +85,74 @@ export function AppSidebar({ navMain, state, ...props }: AppSidebarProps) {
 
   const renderName = () => {
     if (state && "firstname" in state) {
-      const middleInitial = state.middlename ? `${state.middlename.charAt(0)}.` : "";
+      const middleInitial = state.middlename
+        ? `${state.middlename.charAt(0)}.`
+        : "";
       return `${state.firstname} ${middleInitial} ${state.lastname}`;
     }
 
     return state?.username || "Unknown";
   };
 
-
   return (
-      <Sidebar {...props}>
-        <SidebarHeader>
-          <VersionSwitcher
-              versions={["1.0.1", "1.1.0-alpha", "2.0.0-beta1"]}
-              defaultVersion="1.0.1"
-          />
-        </SidebarHeader>
-        <SidebarContent>
-          {navMain.map((section) => (
-              <SidebarGroup key={section.title}>
-                <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    {section.items.map((item) => (
-                        <SidebarMenuItem key={item.title}>
-                          <SidebarMenuButton asChild isActive={pathname === item.url}>
-                            <Link href={item.url}>{item.title}</Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                    ))}
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </SidebarGroup>
-          ))}
-        </SidebarContent>
-        <SidebarFooter>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>
-                  {state?.username?.charAt(0).toUpperCase() || "?"}
-                </AvatarFallback>
-              </Avatar>
-              <div className="text-sm">{renderName()}</div>
-            </div>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="ghost" className="hover:scale-105 transition">
-                  <DoorOpen />
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This will end your session and return you to the login page.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleLogout}>
-                    {loadingLogout ? "Logging out..." : "Logout"}
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+    <Sidebar {...props}>
+      <SidebarHeader>
+        <VersionSwitcher
+          versions={["1.0.1", "1.1.0-alpha", "2.0.0-beta1"]}
+          defaultVersion="1.0.1"
+        />
+      </SidebarHeader>
+      <SidebarContent>
+        {navMain.map((section) => (
+          <SidebarGroup key={section.title}>
+            <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {section.items.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild isActive={pathname === item.url}>
+                      <Link href={item.url}>{item.title}</Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
+      </SidebarContent>
+      <SidebarFooter>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarFallback>M</AvatarFallback>
+            </Avatar>
+            <div className="text-sm truncate max-w-[150px]">{renderName()}</div>
           </div>
-        </SidebarFooter>
-        <SidebarRail />
-      </Sidebar>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="ghost" className="hover:scale-105 transition">
+                <DoorOpen />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This will end your session and return you to the login page.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={handleLogout}>
+                  {loadingLogout ? "Logging out..." : "Logout"}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
   );
 }

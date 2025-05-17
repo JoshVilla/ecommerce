@@ -23,10 +23,6 @@ const Page = () => {
 
   const milkteas = data?.data ?? [];
 
-  useEffect(() => {
-    dispatch(fetchUserInfo("67ffbf2c7bc9ef0310798244") as any);
-  }, []);
-
   return (
     <Container>
       <TitlePage title="All Products" />

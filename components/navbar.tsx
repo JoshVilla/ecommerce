@@ -47,9 +47,8 @@ const Navbar = () => {
       setLoggingOut(true);
       await persistor.flush();
       await persistor.purge();
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("token");
-      }
+      localStorage.removeItem("token");
+      setTokenInfo(null);
       dispatch(clearUser());
       router.push("/");
     } catch (error) {
