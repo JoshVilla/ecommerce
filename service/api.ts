@@ -75,3 +75,11 @@ export const changePassword = async (params: any): Promise<any> => {
 export const updateUserAccount = async (params: any): Promise<any> => {
   return await post("/api/user/updateUserAccount", params);
 };
+
+export const setOrder = async (params: any): Promise<any> => {
+  return await post("/api/user/order/setOrder", params);
+};
+
+export const getOrders = async (params: any): Promise<any> => {
+  return await post("/api/user/order", params);
+};

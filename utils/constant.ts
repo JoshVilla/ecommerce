@@ -7,3 +7,16 @@ export const TAG_CATEGORY = {
   BEST_SELLER: 2,
   PROMO_DISCOUNT: 3,
 };
+
+export const PAYMENT_SERVICE = {
+  PICKUP: 0,
+  COD: 1,
+};
+
+export const ORDER_STATUS = {
+  CONFIRMING: 0,
+  PREPARING: 1,
+  DELIVERING: 2,
+  DELIVERED: 3,
+  CANCELLED: 4,
+};

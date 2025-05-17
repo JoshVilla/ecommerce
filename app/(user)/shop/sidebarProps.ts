@@ -14,9 +14,13 @@ export const navMain = [
     url: "#",
     items: [
       {
+        title: "My Orders",
+        url: "/shop/myOrders",
+      },
+      {
         title: "Settings",
         url: "/shop/settings",
-      }
-    ]
+      },
+    ],
   },
 ];

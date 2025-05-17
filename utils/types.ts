@@ -83,3 +83,12 @@ export interface IUserState {
 }
 
 export type IUserAddress = IUserState["address"];
+
+export interface IOrder {
+  customerId: string;
+  customerName: string;
+  orderList: IMyOrders[];
+  orderStatus: number;
+  paymentServiceMode: number;
+  total: number;
+}
