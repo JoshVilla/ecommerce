@@ -12,6 +12,10 @@ export const navMain = [
         url: "/admin/products",
       },
       {
+        title: "Orders",
+        url: "/admin/orders",
+      },
+      {
         title: "Customers",
         url: "/admin/customers",
       },
@@ -34,28 +38,6 @@ export const navMain = [
       {
         title: "Admins",
         url: "/admin/admins",
-      },
-    ],
-  },
-  {
-    title: "Orders",
-    url: "#",
-    items: [
-      {
-        title: "All Orders",
-        url: "/admin/orders",
-      },
-      {
-        title: "Pending Orders",
-        url: "/admin/orders/pendingOrders",
-      },
-      {
-        title: "Cancelled Orders",
-        url: "/admin/orders/cancelOrders",
-      },
-      {
-        title: "Delivered Orders",
-        url: "/admin/orders/deliveredOrders",
       },
     ],
   },

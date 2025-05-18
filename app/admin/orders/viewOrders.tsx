@@ -32,7 +32,7 @@ const ViewOrders = ({ orders }: Props) => {
         </DialogHeader>
         <div className="space-y-2">
           {orders.map((order) => (
-            <div className="text-xs text-gray-600">
+            <div className="text-xs text-gray-600" key={order.id}>
               <div>{`${order.quantity}x ${order.product}`}</div>
               <div>{order.description}</div>
             </div>

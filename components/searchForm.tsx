@@ -45,6 +45,7 @@ interface SearchFormProps<T> {
   searchProps: SearchProp[];
   api: (params?: any) => Promise<{ data: T[] }>;
   result: (data: T[]) => void;
+  initParams: any;
 }
 
 // Create a dynamic schema based on searchProps
@@ -62,7 +63,12 @@ const createFormSchema = (searchProps: SearchProp[]) => {
   return z.object(schemaObj);
 };
 
-const SearchForm = <T,>({ api, result, searchProps }: SearchFormProps<T>) => {
+const SearchForm = <T,>({
+  api,
+  result,
+  searchProps,
+  initParams,
+}: SearchFormProps<T>) => {
   const formSchema = createFormSchema(searchProps);
   type FormValues = z.infer<typeof formSchema>;
 
@@ -87,7 +93,7 @@ const SearchForm = <T,>({ api, result, searchProps }: SearchFormProps<T>) => {
 
   const handleSearch = (params: FormValues) => {
     setLoadingSearch(true);
-    searchMutation.mutate(params);
+    searchMutation.mutate({ ...params, ...initParams });
   };
 
   const handleReset = () => {

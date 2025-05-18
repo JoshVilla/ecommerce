@@ -93,6 +93,9 @@ export interface IOrder {
   orderStatus: number;
   paymentServiceMode: number;
   total: number;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
 }
 
 export interface IPagination {

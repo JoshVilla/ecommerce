@@ -4,7 +4,9 @@ import Order from "@/models/ordersModel";
 export async function getOrdersController(
   customerId: string,
   currentPage: number = 1,
-  limit: number = 10
+  itemsPerPage: number = 10,
+  orderStatus: number,
+  paymentServiceMode: number
 ) {
   try {
     await connectToDatabase();
@@ -14,8 +16,18 @@ export async function getOrdersController(
     if (customerId) {
       params.customerId = customerId;
     }
+    if (orderStatus) {
+      params.orderStatus = Number(orderStatus);
+    }
 
-    const fixedLimit = limit + 1;
+    if (paymentServiceMode) {
+      params.paymentServiceMode = Number(paymentServiceMode);
+    }
+
+    console.log(params);
+
+    //add 1 to acccurately show exact limit
+    const fixedLimit = itemsPerPage + 1;
 
     // Calculate skip value for pagination
     const skip = (currentPage - 1) * fixedLimit;
@@ -33,7 +45,7 @@ export async function getOrdersController(
         currentPage: currentPage,
         totalPages,
         totalItems: totalOrders,
-        itemsPerPage: limit,
+        itemsPerPage,
       },
     };
   } catch (error) {
