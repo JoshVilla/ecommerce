@@ -4,7 +4,7 @@ import OrderProgressStepperPickup from "@/components/orderProgressStepperPickUp"
 import { RootState } from "@/redux/store/store";
 import { getOrders, updateOrderStatus } from "@/service/api";
 import { ORDER_STATUS, PAYMENT_SERVICE } from "@/utils/constant";
-import { IOrder, IUserState } from "@/utils/types";
+import { IOrder } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { InfoIcon } from "lucide-react";
 import React from "react";

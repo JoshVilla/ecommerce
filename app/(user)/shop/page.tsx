@@ -8,14 +8,12 @@ import { getMilktea } from "@/service/api";
 import { useQuery } from "@tanstack/react-query";
 import { Heart } from "lucide-react";
 import Image from "next/image";
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 import MilkteaInfo from "./milkteaInfo";
-import { useDispatch, useSelector } from "react-redux";
-
-import { fetchUserInfo } from "@/redux/slices/userSlice";
+import { motion } from "framer-motion";
+import MilkTeaCard from "@/components/milkteaCard";
 
 const Page = () => {
-  const dispatch = useDispatch();
   const { data, isLoading } = useQuery({
     queryKey: ["all-products"],
     queryFn: () => getMilktea({}),
@@ -32,37 +30,20 @@ const Page = () => {
         ) : (
           <div className="flex items-center gap-6 flex-wrap">
             {milkteas.map(
-              (milktea: INewMilktea): ReactNode => (
-                <div
+              (milktea: INewMilktea, index: number): ReactNode => (
+                <motion.div
                   key={milktea._id}
                   className="w-40 h-80 flex flex-col justify-between"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1,
+                    ease: "easeOut",
+                  }}
                 >
-                  <div>
-                    <div className="border h-50 w-40 relative">
-                      <Image
-                        src={milktea.imageUrl}
-                        alt={milktea.name}
-                        fill
-                        className="object-cover rounded"
-                      />
-                    </div>
-                    <div className="mt-4 font-semibold">{milktea.name}</div>
-                    <div className="text-gray-500 text-xs line-clamp-2 overflow-hidden">
-                      {milktea.description}
-                    </div>
-                  </div>
-
-                  <div className="mt-4 space-x-3">
-                    <MilkteaInfo record={milktea} />
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="cursor-pointer"
-                    >
-                      <Heart />
-                    </Button>
-                  </div>
-                </div>
+                  <MilkTeaCard data={milktea} />
+                </motion.div>
               )
             )}
           </div>

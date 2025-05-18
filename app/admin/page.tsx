@@ -5,7 +5,8 @@ import React from "react";
 function page() {
   return (
     <div>
-      <TitlePage title="Admin" />
+      <TitlePage title="Dashboard" />
+      <div className="my-6"></div>
     </div>
   );
 }

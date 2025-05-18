@@ -35,14 +35,15 @@ const ViewOrders = ({ orders }: Props) => {
             <div className="text-xs text-gray-600" key={order.id}>
               <div>{`${order.quantity}x ${order.product}`}</div>
               <div>{order.description}</div>
+              <div className="font-bold">P{order.total.toFixed(2)}</div>
             </div>
           ))}
         </div>
-        <DialogFooter>
+        {/* <DialogFooter>
           <Button type="submit" size="sm">
             Ok
           </Button>
-        </DialogFooter>
+        </DialogFooter> */}
       </DialogContent>
     </Dialog>
   );

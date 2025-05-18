@@ -87,3 +87,11 @@ export const getOrders = async (params: any): Promise<any> => {
 export const updateOrderStatus = async (params: any): Promise<any> => {
   return await post("/api/user/order/updateOrderStatus", params);
 };
+
+export const addMyFavorites = async (params: any): Promise<any> => {
+  return await post("/api/user/favorite/addFavorite", params);
+};
+
+export const getMyFavorites = async (params: any): Promise<any> => {
+  return await post("/api/user/favorite", params);
+};
