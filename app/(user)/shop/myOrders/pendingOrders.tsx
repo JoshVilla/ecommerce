@@ -124,10 +124,13 @@ const PendingOrders = () => {
   if (isError) return <div>Error fetching orders</div>;
   if (!data?.data) return null;
 
-  const activeOrders = data.data.filter(
-    (order: IOrder) => order.orderStatus !== ORDER_STATUS.CANCELLED
+  const activeOrders = data.data.orders.filter(
+    (order: IOrder) =>
+      order.orderStatus !== ORDER_STATUS.CANCELLED &&
+      order.orderStatus !== ORDER_STATUS.DELIVERED
   );
 
+  console.log(activeOrders, "activeOrders");
   return (
     <div>
       <div className="space-y-4">

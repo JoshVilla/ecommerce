@@ -24,20 +24,15 @@ export async function getOrdersController(
       params.paymentServiceMode = Number(paymentServiceMode);
     }
 
-    console.log(params);
-
-    //add 1 to acccurately show exact limit
-    const fixedLimit = itemsPerPage + 1;
-
     // Calculate skip value for pagination
-    const skip = (currentPage - 1) * fixedLimit;
+    const skip = (currentPage - 1) * itemsPerPage;
 
     // Fetch orders from the database with pagination
-    const orders = await Order.find(params).skip(skip).limit(fixedLimit);
+    const orders = await Order.find(params).skip(skip).limit(itemsPerPage);
 
     // Get total count of orders for pagination metadata
     const totalOrders = await Order.countDocuments(params);
-    const totalPages = Math.ceil(totalOrders / fixedLimit);
+    const totalPages = Math.ceil(totalOrders / itemsPerPage);
 
     return {
       orders,

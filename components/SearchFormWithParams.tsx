@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { Search } from "lucide-react";
 
 export interface SearchOption {
   label: string;
@@ -126,6 +127,7 @@ const SearchFormWithParams = ({
           className="cursor-pointer"
           size="sm"
         >
+          <Search />
           Search
         </Button>
         <Button

@@ -21,8 +21,11 @@ import PaginationComponent from "@/components/pagination";
 import SearchFormWithParams from "@/components/SearchFormWithParams";
 import { searchProps } from "./searchProps";
 import { usePagination } from "@/hooks/usePagination";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
   const {
     pageState,
     handlePageStateChange,
@@ -103,6 +106,14 @@ const Page = () => {
     <Container>
       <TitlePage title="All Orders" />
       <div>
+        <Button
+          variant="default"
+          size="sm"
+          className="mt-6 cursor-pointer"
+          onClick={() => router.push("/admin/orders/pendingOrders")}
+        >
+          Pending Orders
+        </Button>
         <SearchFormWithParams
           searchProps={searchProps}
           onSearch={handleSearch}
