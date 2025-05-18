@@ -85,10 +85,19 @@ export interface IUserState {
 export type IUserAddress = IUserState["address"];
 
 export interface IOrder {
+  _id?: string;
+  address?: INewAddress;
   customerId: string;
   customerName: string;
   orderList: IMyOrders[];
   orderStatus: number;
   paymentServiceMode: number;
   total: number;
+}
+
+export interface IPagination {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  itemsPerPage: number;
 }

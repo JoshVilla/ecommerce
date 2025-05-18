@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import type { Metadata } from "next";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { ORDER_STATUS, PAYMENT_SERVICE } from "./constant";
 export const getCloudinaryPublicId = (url: string) => {
   if (!url) return null;
 
@@ -63,4 +64,32 @@ export const formattedDate = (dateString?: string): string => {
     day: "numeric",
   };
   return date.toLocaleDateString("en-US", options);
+};
+
+export const orderStatusText = (status: number): string => {
+  switch (status) {
+    case ORDER_STATUS.CONFIRMING:
+      return "Confirming";
+    case ORDER_STATUS.PREPARING:
+      return "Preparing";
+    case ORDER_STATUS.DELIVERING:
+      return "Delivering";
+    case ORDER_STATUS.DELIVERED:
+      return "Delivered";
+    case ORDER_STATUS.CANCELLED:
+      return "Cancelled";
+    default:
+      return "Unknown";
+  }
+};
+
+export const paymentServiceText = (status: number): string => {
+  switch (status) {
+    case PAYMENT_SERVICE.PICKUP:
+      return "Pickup";
+    case PAYMENT_SERVICE.COD:
+      return "Cash on Delivery";
+    default:
+      return "Unknown";
+  }
 };

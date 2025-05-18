@@ -3,9 +3,9 @@ import { getOrdersController } from "@/controllers/getOrdersController";
 
 export async function POST(req: NextRequest) {
   try {
-    const { customerId } = await req.json();
+    const { customerId, limit, currentPage } = await req.json();
 
-    const orders = await getOrdersController(customerId);
+    const orders = await getOrdersController(customerId, currentPage, limit);
 
     return NextResponse.json({
       message: "Orders Fetched",

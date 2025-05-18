@@ -6,7 +6,9 @@ import { Badge } from "./ui/badge";
 interface OrderProgressStepperProps {
   orderStatus: number;
 }
-const OrderProgressStepper = ({ orderStatus }: OrderProgressStepperProps) => {
+const OrderProgressStepperDelivery = ({
+  orderStatus,
+}: OrderProgressStepperProps) => {
   const renderProgressStepper = (value: number) => {
     const stepper = [
       {
@@ -80,4 +82,4 @@ const OrderProgressStepper = ({ orderStatus }: OrderProgressStepperProps) => {
   return renderProgressStepper(orderStatus);
 };
 
-export default OrderProgressStepper;
+export default OrderProgressStepperDelivery;

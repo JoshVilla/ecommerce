@@ -175,7 +175,7 @@ const Page = () => {
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Pickup */}
                 <div
-                  className="flex-1 p-2  cursor-pointer hover:scale-105 transition-all"
+                  className="flex-1 p-2  cursor-pointer"
                   style={{
                     borderBottom:
                       paymentServiceCode === 0
@@ -204,7 +204,7 @@ const Page = () => {
                 </div>
                 {/* Address */}
                 <div
-                  className="flex-1 p-2  cursor-pointer hover:scale-105 transition-all"
+                  className="flex-1 p-2  cursor-pointer"
                   style={{
                     borderBottom:
                       paymentServiceCode === 1

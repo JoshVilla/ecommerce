@@ -5,6 +5,8 @@ export async function POST(req: NextRequest) {
   try {
     const params = await req.json();
 
+    console.log(params);
+
     const newOrder = await SetOrderController(params);
 
     return NextResponse.json({

@@ -83,3 +83,7 @@ export const setOrder = async (params: any): Promise<any> => {
 export const getOrders = async (params: any): Promise<any> => {
   return await post("/api/user/order", params);
 };
+
+export const updateOrderStatus = async (params: any): Promise<any> => {
+  return await post("/api/user/order/updateOrderStatus", params);
+};
