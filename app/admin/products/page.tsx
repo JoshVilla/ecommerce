@@ -63,7 +63,9 @@ const Page = () => {
     return data?.data?.map((milktea: INewMilktea) => (
       <TableRow key={milktea._id}>
         <TableCell>{milktea.name}</TableCell>
-        <TableCell>{milktea.description}</TableCell>
+        <TableCell className="max-w-[200px] truncate whitespace-nowrap overflow-hidden">
+          {milktea.description}
+        </TableCell>
         <TableCell>
           <DeleteMilktea refetch={refetch} record={milktea} />
           <Button

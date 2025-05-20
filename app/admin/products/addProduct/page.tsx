@@ -125,7 +125,7 @@ export default function AddProductForm() {
         form.reset();
         form.clearErrors();
       } else {
-        toast.error(data.message);
+        toast.error("Failed to add product. Please try again.");
       }
     },
     onError: (error) => {

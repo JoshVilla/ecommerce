@@ -3,30 +3,24 @@
 import { INewMilktea } from "@/app/admin/products/page";
 import Container from "@/components/container";
 import TitlePage from "@/components/titlePage";
-import { Button } from "@/components/ui/button";
-import { getMilktea } from "@/service/api";
+import { getMilktea, getTaggedMilktea } from "@/service/api";
 import { useQuery } from "@tanstack/react-query";
-import { Heart } from "lucide-react";
-import Image from "next/image";
 import React, { ReactNode, useState } from "react";
-import MilkteaInfo from "./milkteaInfo";
 import { motion } from "framer-motion";
 import MilkTeaCard from "@/components/milkteaCard";
+import { TAG_CATEGORY } from "@/utils/constant";
 
 const Page = () => {
-  const [MilkteaList, setMilkteaList] = useState([]);
-  const [activeCategory, setActiveCategory] = useState(1);
   const { data, isLoading } = useQuery({
-    queryKey: ["all-products", activeCategory],
-    queryFn: () => getMilktea({}),
-    enabled: activeCategory === 1,
+    queryKey: ["all-products"],
+    queryFn: () => getTaggedMilktea({ category: TAG_CATEGORY.NEW_PRODUCT }),
   });
 
-  const milkteas = data?.data ?? [];
+  const milkteas = data?.data[0].milkteaIds ?? [];
 
   return (
     <Container>
-      <TitlePage title="All Products" />
+      <TitlePage title="New Products" />
       <div className="my-10">
         {isLoading ? (
           <p>Loading...</p>

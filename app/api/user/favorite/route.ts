@@ -7,8 +7,6 @@ export async function POST(req: NextRequest) {
     const getMyFavorites = await getMyFavoritesController(customerId);
 
     return NextResponse.json({
-      isSuccess: true,
-      message: "Successfully get my favorites",
       data: getMyFavorites,
     });
   } catch (error) {

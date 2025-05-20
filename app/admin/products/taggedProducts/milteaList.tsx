@@ -46,7 +46,7 @@ const MilkteaList = ({ category, defaultItems, refetch }: Props) => {
       if (exists) {
         return prev.filter((item) => item.id !== milktea._id);
       } else {
-        return [...prev, { id: milktea._id, name: milktea.name }];
+        return [...prev, { id: milktea._id, ...milktea }];
       }
     });
   };
@@ -87,6 +87,7 @@ const MilkteaList = ({ category, defaultItems, refetch }: Props) => {
         milkteaIds: selectedMilkteaIds,
         category,
       };
+      // console.log(params);
 
       updateMutation.mutate(params);
     } catch (error) {

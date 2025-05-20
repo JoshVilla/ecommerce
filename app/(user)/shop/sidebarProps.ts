@@ -7,6 +7,14 @@ export const navMain = [
         title: "All Products",
         url: "/shop/",
       },
+      {
+        title: "New Products",
+        url: "/shop/newProducts",
+      },
+      {
+        title: "Best Seller",
+        url: "/shop/bestSeller",
+      },
     ],
   },
   {

@@ -3,7 +3,8 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const data = await tagMilkteaData();
+    const { category } = await req.json();
+    const data = await tagMilkteaData(category);
 
     return NextResponse.json({
       data,

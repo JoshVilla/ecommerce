@@ -38,6 +38,7 @@ import { clearMilktea } from "@/redux/slices/milkteaSlice";
 import { clearUser } from "@/redux/slices/userSlice";
 import { clearAdmin } from "@/redux/slices/adminSlice";
 import { clearMyOrders } from "@/redux/slices/myOrdersSlice";
+import { clearFavorites } from "@/redux/slices/favoriteSlices";
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   navMain: {
@@ -61,6 +62,7 @@ export function AppSidebar({ navMain, state, ...props }: AppSidebarProps) {
     dispatch(clearUser());
     dispatch(clearMilktea());
     dispatch(clearMyOrders());
+    dispatch(clearFavorites());
   };
 
   const clearAllSlicesAndRedirect = () => {

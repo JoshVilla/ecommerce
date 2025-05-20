@@ -31,7 +31,7 @@ const Page = () => {
   return (
     <div>
       <TitlePage title="My Favorites" />
-      <div className="flex items-center gap-6 flex-wrap">
+      <div className="flex items-center gap-6 flex-wrap my-6">
         {favorites.map(
           (favorite: INewMilktea, index: number): ReactNode => (
             <motion.div

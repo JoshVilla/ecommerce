@@ -6,7 +6,11 @@ export async function getMyFavoritesController(customerId: string) {
     await connectToDatabase();
 
     const favorites = await Favorites.findOne({ customerId });
-    return favorites;
+
+    //@ts-ignore
+    const milkteaIds = favorites?.favorites.map((fav) => fav._id);
+
+    return { ...favorites?.toObject(), milkteaIds };
   } catch (error) {
     console.log(error);
   }

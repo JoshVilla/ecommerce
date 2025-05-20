@@ -92,6 +92,14 @@ export const addMyFavorites = async (params: any): Promise<any> => {
   return await post("/api/user/favorite/addFavorite", params);
 };
 
+export const removeMyFavorites = async (params: any): Promise<any> => {
+  return await post("/api/user/favorite/removeFavorite", params);
+};
+
 export const getMyFavorites = async (params: any): Promise<any> => {
   return await post("/api/user/favorite", params);
+};
+
+export const getPendingOrder = async (params: any): Promise<any> => {
+  return await post("/api/user/order/getPendingOrder", params);
 };

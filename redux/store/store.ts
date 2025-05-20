@@ -2,6 +2,7 @@ import userReducer from "@/redux/slices/userSlice";
 import adminReducer from "@/redux/slices/adminSlice";
 import myOrdersReducer from "@/redux/slices/myOrdersSlice";
 import milkteaReducer from "@/redux/slices/milkteaSlice";
+import favoritesReducer from "@/redux/slices/favoriteSlices";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -9,7 +10,7 @@ import { persistReducer, persistStore } from "redux-persist";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "admin", "milktea", "myOrders"],
+  whitelist: ["user", "admin", "milktea", "myOrders", "favorites"],
 };
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   admin: adminReducer,
   milktea: milkteaReducer,
   myOrders: myOrdersReducer,
+  favorites: favoritesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

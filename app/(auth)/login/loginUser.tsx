@@ -13,8 +13,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { fetchUserInfo, setUser } from "@/redux/slices/userSlice";
 import { motion } from "framer-motion";
-import TitlePage from "@/components/titlePage";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { fetchFavorites } from "@/redux/slices/favoriteSlices";
 
 // Define the Zod schema for validation
 const schema = z.object({
@@ -39,6 +38,18 @@ function UserLogin() {
     resolver: zodResolver(schema),
   });
 
+  const fetchAllData = async (userId: string) => {
+    try {
+      await Promise.all([
+        dispatch(fetchUserInfo(userId) as any),
+        dispatch(fetchFavorites(userId) as any),
+      ]);
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to fetch data. Please try again.");
+    }
+  };
+
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
@@ -46,9 +57,7 @@ function UserLogin() {
         toast.success("Login successful!");
         localStorage.setItem("token", data.token);
         router.push("/shop");
-        // dispatch(setUser(data.user));
-        // console.log(data.user);
-        dispatch(fetchUserInfo(data.user._id) as any);
+        fetchAllData(data.user._id);
       } else {
         toast.error(data.message);
       }
