@@ -1,5 +1,5 @@
 import { ORDER_STATUS } from "@/utils/constant";
-import { CheckCircle, ChefHat, PackageCheck } from "lucide-react";
+import { Check, CheckCircle, ChefHat, PackageCheck } from "lucide-react";
 import React from "react";
 import { Badge } from "./ui/badge";
 interface OrderProgressStepperProps {
@@ -23,8 +23,13 @@ const OrderProgressStepperPickup = ({
       },
       {
         label: "Ready to pickup",
-        value: ORDER_STATUS.DELIVERED,
+        value: ORDER_STATUS.DELIVERING,
         icon: <PackageCheck width={16} />,
+      },
+      {
+        label: "Sold",
+        value: ORDER_STATUS.DELIVERED,
+        icon: <Check width={16} />,
       },
     ];
     return (

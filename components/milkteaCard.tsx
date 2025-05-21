@@ -21,7 +21,8 @@ interface Props {
 }
 
 const MilkTeaCard = ({ data }: Props) => {
-  const dispatch = useDispatch(); // ✅ Add this
+  console.log(data, "data");
+  const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const userState = useSelector(
     (state: RootState) => state.user.user as IUserState
@@ -77,6 +78,9 @@ const MilkTeaCard = ({ data }: Props) => {
     mutation.mutate({ customerId, milkteaId: milkteaId });
   };
 
+  // Don't render Image component if imageUrl is empty string
+  const shouldRenderImage = data.imageUrl !== "";
+
   return (
     <React.Fragment>
       <div>
@@ -85,13 +89,16 @@ const MilkTeaCard = ({ data }: Props) => {
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.2 }}
         >
-          <Image
-            src={data.imageUrl}
-            alt={data.name}
-            fill
-            priority
-            className="object-cover rounded"
-          />
+          {shouldRenderImage && (
+            <Image
+              src={data.imageUrl ?? null}
+              alt={data.name}
+              fill
+              priority
+              className="object-cover rounded"
+              sizes="(100vw: 100%)"
+            />
+          )}
         </motion.div>
         <div className="mt-4 font-semibold">{data.name}</div>
         <div className="text-gray-500 text-xs line-clamp-2 overflow-hidden">

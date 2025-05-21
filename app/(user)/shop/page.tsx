@@ -12,24 +12,27 @@ import React, { ReactNode, useState } from "react";
 import MilkteaInfo from "./milkteaInfo";
 import { motion } from "framer-motion";
 import MilkTeaCard from "@/components/milkteaCard";
+import MilkteaLoader from "@/components/loader/milkteaLoader";
 
 const Page = () => {
-  const [MilkteaList, setMilkteaList] = useState([]);
-  const [activeCategory, setActiveCategory] = useState(1);
   const { data, isLoading } = useQuery({
-    queryKey: ["all-products", activeCategory],
+    queryKey: ["all-products"],
     queryFn: () => getMilktea({}),
-    enabled: activeCategory === 1,
   });
 
   const milkteas = data?.data ?? [];
 
+  const countLoader = new Array(6).fill(0);
   return (
     <Container>
       <TitlePage title="All Products" />
       <div className="my-10">
         {isLoading ? (
-          <p>Loading...</p>
+          <div className="flex items-center gap-6 flex-wrap">
+            {countLoader.map((_, index) => (
+              <MilkteaLoader key={index} />
+            ))}
+          </div>
         ) : (
           <div className="flex items-center gap-6 flex-wrap">
             {milkteas.map(

@@ -36,7 +36,8 @@ const ORDER_STATUS_DELIVER_OPTIONS = [
 const ORDER_STATUS_PICKUP_OPTIONS = [
   { value: ORDER_STATUS.CONFIRMING, label: "Confirming" },
   { value: ORDER_STATUS.PREPARING, label: "Preparing" },
-  { value: ORDER_STATUS.DELIVERED, label: "Ready to Pickup" },
+  { value: ORDER_STATUS.DELIVERING, label: "Ready to Pickup" },
+  { value: ORDER_STATUS.DELIVERED, label: "Sold" },
   { value: ORDER_STATUS.CANCELLED, label: "Cancel" },
 ];
 
@@ -115,7 +116,10 @@ const Page = () => {
             key={order._id}
           >
             <div className="flex items-center justify-between">
-              <RenderOrderStatusBadge status={order.orderStatus} />
+              <RenderOrderStatusBadge
+                status={order.orderStatus}
+                paymentService={order.paymentServiceMode}
+              />
               <Select
                 value={order.orderStatus.toString()}
                 onValueChange={(newStatus) =>

@@ -21,3 +21,9 @@ export const ORDER_STATUS = {
   DELIVERED: 3,
   CANCELLED: 4,
 };
+
+export const ANIMATION_CONFIG = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, ease: "easeOut" },
+};

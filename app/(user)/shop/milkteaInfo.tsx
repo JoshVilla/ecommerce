@@ -69,7 +69,7 @@ const MilkteaInfo = ({ record }: Props) => {
       id: uuidv4(),
     };
 
-    console.log("Order added to cart:", finalOrder);
+    setOpenSheet(false);
     toast.success("Added to cart!");
     dispatch(addToMyOrders(finalOrder));
   };
@@ -225,10 +225,10 @@ const MilkteaInfo = ({ record }: Props) => {
         </SheetHeader>
 
         <SheetFooter>
-          <Button onClick={() => dispatch(clearMyOrders())}>
+          {/* <Button onClick={() => dispatch(clearMyOrders())}>
             <ShoppingCart className="mr-2" /> Clear
-          </Button>
-          <Button onClick={addToCart}>
+          </Button> */}
+          <Button onClick={addToCart} className="cursor-pointer">
             <ShoppingCart className="mr-2" /> Add to cart
           </Button>
         </SheetFooter>

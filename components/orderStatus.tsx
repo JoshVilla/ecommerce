@@ -1,8 +1,11 @@
 import { Badge } from "@/components/ui/badge";
-import { ORDER_STATUS } from "@/utils/constant";
+import { ORDER_STATUS, PAYMENT_SERVICE } from "@/utils/constant";
 import React from "react";
 
-const orderStatusMap: Record<number, { text: string; className: string }> = {
+const orderStatusDeliveryMap: Record<
+  number,
+  { text: string; className: string }
+> = {
   [ORDER_STATUS.CONFIRMING]: {
     text: "Confirming",
     className: "bg-yellow-100 text-yellow-800",
@@ -25,11 +28,41 @@ const orderStatusMap: Record<number, { text: string; className: string }> = {
   },
 };
 
-type Props = {
-  status: number;
+const orderStatusPickUpMap: Record<
+  number,
+  { text: string; className: string }
+> = {
+  [ORDER_STATUS.CONFIRMING]: {
+    text: "Confirming",
+    className: "bg-yellow-100 text-yellow-800",
+  },
+  [ORDER_STATUS.PREPARING]: {
+    text: "Preparing",
+    className: "bg-blue-100 text-blue-800",
+  },
+  [ORDER_STATUS.DELIVERING]: {
+    text: "Ready to Pickup",
+    className: "bg-green-100 text-green-800",
+  },
+  [ORDER_STATUS.DELIVERED]: {
+    text: "Sold",
+    className: "bg-green-100 text-green-800",
+  },
 };
 
-const RenderOrderStatusBadge: React.FC<Props> = ({ status }) => {
+type Props = {
+  status: number;
+  paymentService: number;
+};
+
+const RenderOrderStatusBadge: React.FC<Props> = ({
+  status,
+  paymentService,
+}) => {
+  const orderStatusMap =
+    paymentService === PAYMENT_SERVICE.COD
+      ? orderStatusDeliveryMap
+      : orderStatusPickUpMap;
   const statusInfo = orderStatusMap[status] ?? {
     text: "Unknown",
     className: "bg-gray-200 text-gray-600",

@@ -12,7 +12,7 @@ export async function getPendingOrdersController(
     const skip = (currentPage - 1) * itemsPerPage;
 
     const baseQuery = {
-      orderStatus: { $nin: [ORDER_STATUS.DELIVERED, ORDER_STATUS.CANCELLED] },
+      // orderStatus: { $nin: [ORDER_STATUS.CANCELLED] },
       ...(customerId && { customerId }),
     };
 
@@ -24,13 +24,9 @@ export async function getPendingOrdersController(
         .lean(),
       Order.countDocuments({
         ...baseQuery,
-        orderStatus: { $nin: [ORDER_STATUS.DELIVERED, ORDER_STATUS.CANCELLED] },
+        orderStatus: { $nin: [ORDER_STATUS.CANCELLED] },
       }),
     ]);
-
-    if (!orders.length) {
-      throw new Error("No pending orders found");
-    }
 
     return {
       orders,

@@ -9,6 +9,7 @@ import React, { ReactNode, useState } from "react";
 import { motion } from "framer-motion";
 import MilkTeaCard from "@/components/milkteaCard";
 import { TAG_CATEGORY } from "@/utils/constant";
+import MilkteaLoader from "@/components/loader/milkteaLoader";
 
 const Page = () => {
   const { data, isLoading } = useQuery({
@@ -18,12 +19,18 @@ const Page = () => {
 
   const milkteas = data?.data[0].milkteaIds ?? [];
 
+  const countLoader = new Array(6).fill(0);
+
   return (
     <Container>
       <TitlePage title="Best Seller" />
       <div className="my-10">
         {isLoading ? (
-          <p>Loading...</p>
+          <div className="flex items-center gap-6 flex-wrap">
+            {countLoader.map((_, index) => (
+              <MilkteaLoader key={index} />
+            ))}
+          </div>
         ) : (
           <div className="flex items-center gap-6 flex-wrap">
             {milkteas.map(
