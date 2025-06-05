@@ -21,7 +21,6 @@ interface Props {
 }
 
 const MilkTeaCard = ({ data }: Props) => {
-  console.log(data, "data");
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const userState = useSelector(
@@ -31,6 +30,7 @@ const MilkTeaCard = ({ data }: Props) => {
   const favoriteState = useSelector(
     (state: RootState) => state.favorites.favorites
   );
+
   const [mode, setMode] = useState<"add" | "remove">("add");
 
   const mutation = useMutation({

@@ -122,7 +122,6 @@ const PendingOrders = () => {
     queryKey: ["pending-orders", customerId, pageState.currentPage],
     queryFn: () =>
       getPendingOrder({
-        customerId,
         currentPage: pageState.currentPage,
         itemsPerPage: pageState.itemsPerPage,
       }),

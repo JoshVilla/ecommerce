@@ -20,7 +20,7 @@ const Page = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["favorites"],
-    queryFn: () => getMyFavorites({ customerId }),
+    queryFn: () => getMyFavorites(),
   });
 
   const favorites = data?.data?.favorites || [];
@@ -33,7 +33,6 @@ const Page = () => {
 
   if (favorites.length === 0) return <p>No favorites</p>;
 
-  const countLoader = new Array(6).fill(0);
   return (
     <div>
       <TitlePage title="My Favorites" />

@@ -1,11 +1,19 @@
 import { NextResponse, NextRequest } from "next/server";
 import { getPendingOrdersController } from "@/controllers/getPendingOrdersController";
+import { verifyToken } from "@/utils/nonAsyncHelpers";
 
 export async function POST(request: NextRequest) {
   try {
-    const { customerId, currentPage, itemsPerPage } = await request.json();
+    const { currentPage, itemsPerPage } = await request.json();
+    const token = verifyToken(request.headers.get("Authorization"));
+    if (!token) {
+      return NextResponse.json(
+        { message: "Unauthorized", isSuccess: false },
+        { status: 401 }
+      );
+    }
     const pendingOrders = await getPendingOrdersController(
-      customerId,
+      token?.userId,
       currentPage,
       itemsPerPage
     );

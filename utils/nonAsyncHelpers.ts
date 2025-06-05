@@ -34,15 +34,27 @@ export const getMetadata = (title: string, description?: string): Metadata => {
   };
 };
 
-export const verifyToken = (token: string) => {
+export const verifyToken = (authHeader: string | null): JwtPayload | null => {
+  if (!authHeader) return null;
+
+  const token = authHeader.split(" ")[1];
+  if (!token) return null;
+
   try {
-    return jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET as string);
+    const decoded = jwt.verify(
+      token,
+      process.env.NEXT_PUBLIC_JWT_SECRET as string
+    );
+    return decoded as JwtPayload;
   } catch (err) {
+    console.error("Token verification failed:", err);
     return null;
   }
 };
 
 export const getDecodedToken = (): JwtPayload | null => {
+  if (typeof window === "undefined") return null; // SSR safety
+
   const token = localStorage.getItem("token");
   if (!token) return null;
 
@@ -50,7 +62,7 @@ export const getDecodedToken = (): JwtPayload | null => {
     const decoded = jwt.decode(token);
     return decoded as JwtPayload;
   } catch (err) {
-    console.error("Error decoding token", err);
+    console.error("Error decoding token:", err);
     return null;
   }
 };
