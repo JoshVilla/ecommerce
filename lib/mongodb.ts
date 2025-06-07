@@ -2,12 +2,6 @@ import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.NEXT_PUBLIC_ATLAS_DB_LINK;
 
-// if (!MONGODB_URI) {
-//   throw new Error(
-//     "Please define the ATLAS_DB_LINK environment variable in .env.local"
-//   );
-// }
-
 // Ensure global object exists for caching (important for Next.js and serverless)
 // @ts-ignore
 global.mongoose = global.mongoose || { conn: null, promise: null };
