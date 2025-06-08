@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { IMyOrders } from "@/utils/types";
+import { IMyOrders, INewAddress } from "@/utils/types";
 
 interface Props {
   orders: IMyOrders[];
