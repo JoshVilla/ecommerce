@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getOrders, getPendingOrder, updateOrderStatus } from "@/service/api";
+import { getPendingOrder, updateOrderStatus } from "@/service/api";
 import { ORDER_STATUS } from "@/utils/constant";
 import { IMyOrders, IOrder, IUserState } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -22,7 +22,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import { motion } from "framer-motion";
 import { usePagination } from "@/hooks/usePagination";
-import { Pagination } from "@/components/ui/pagination";
 import PaginationComponent from "@/components/pagination";
 
 const ORDER_STATUS_DELIVER_OPTIONS = [

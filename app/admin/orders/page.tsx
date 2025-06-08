@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { IOrder, IPagination } from "@/utils/types";
+import { IOrder } from "@/utils/types";
 import RenderOrderStatusBadge from "@/components/orderStatus";
 import ViewOrders from "./viewOrders";
 import { formattedDate } from "@/utils/nonAsyncHelpers";
