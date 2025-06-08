@@ -18,10 +18,25 @@ export interface IMilktea {
   sugarLevel: number[]; // array of numbers like [0, 25, 50, 75]
   sizes: ISizes[];
   addons: IAddOns[];
+  isSale: boolean;
+  saleAmount: number | null; // percentage like 25
+  saledPrizes: ISizes[] | null;
 }
 
 const MilkteaSchema = new mongoose.Schema<IMilktea>(
   {
+    saledPrizes: {
+      type: [
+        {
+          size: { type: String, required: true },
+          ml: { type: String, required: true },
+          price: { type: String, required: true },
+        },
+      ],
+      default: null,
+    },
+    isSale: { type: Boolean, default: false },
+    saleAmount: { type: Number, default: null },
     imageUrl: { type: String, required: true }, // use image URL or base64 string
     name: { type: String, required: true },
     description: { type: String, required: true },

@@ -103,3 +103,11 @@ export const getMyFavorites = async (params: any = {}): Promise<any> => {
 export const getPendingOrder = async (params: any): Promise<any> => {
   return await post("/api/user/order/getPendingOrder", params);
 };
+
+export const addMilkteaDiscount = async (params: any): Promise<any> => {
+  return await post("/api/admin/product/addDiscount", params);
+};
+
+export const removeMilkteaDiscount = async (params: any): Promise<any> => {
+  return await post("/api/admin/product/removeDiscount", params);
+};

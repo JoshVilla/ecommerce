@@ -9,7 +9,6 @@ export async function addMyFavoritesController(
   try {
     await connectToDatabase();
 
-    // Get full milktea info as plain JS object
     const milkteaInfo = await Milktea.findById(milkteaId).lean();
     if (!milkteaInfo) {
       return { isSuccess: false, message: "Milktea not found" };
@@ -18,23 +17,19 @@ export async function addMyFavoritesController(
     let favoritesDoc = await Favorites.findOne({ customerId });
 
     if (!favoritesDoc) {
-      // No favorites yet, create new with first milktea embedded
-      const newFavorites = new Favorites({
+      const newFavorites = await Favorites.create({
         customerId,
         favorites: [milkteaInfo],
       });
-      const saved = await newFavorites.save();
       return {
         isSuccess: true,
         message: "Successfully added to favorites",
-        data: saved,
+        data: newFavorites,
       };
     }
 
-    // Check if milktea is already in favorites by _id string comparison
     const alreadyFavorited = favoritesDoc.favorites.some(
-      //@ts-ignore
-      (fav) => fav._id.toString() === milkteaId
+      (fav: any) => fav._id.toString() === milkteaId
     );
 
     if (alreadyFavorited) {
@@ -45,13 +40,16 @@ export async function addMyFavoritesController(
       };
     }
 
-    // Push full milktea info
-    //@ts-ignore
     favoritesDoc.favorites.push(milkteaInfo);
     const updated = await favoritesDoc.save();
 
-    return updated;
+    return {
+      isSuccess: true,
+      message: "Successfully added to favorites",
+      data: updated,
+    };
   } catch (error) {
     console.error("Add favorite error:", error);
+    return { isSuccess: false, message: "Internal server error" };
   }
 }

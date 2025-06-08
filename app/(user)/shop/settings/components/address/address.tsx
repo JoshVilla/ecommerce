@@ -222,7 +222,15 @@ const Address = () => {
       return <div>No address found.</div>;
     }
     return data?.data.map((address: INewAddress, index: number) => (
-      <div className="border w-full p-4 mt-4 space-y-2" key={index}>
+      <div
+        className="border w-full p-4 mt-4 space-y-2"
+        style={{
+          border: `${
+            address.isDefaultAddress ? "2px solid skyblue" : undefined
+          }`,
+        }}
+        key={index}
+      >
         {address.isDefaultAddress && <Badge>Default</Badge>}
         <div className="text-sm text-gray-600">
           {`${address.region}, ${address.province}, ${address.city}, ${address.barangay}`}

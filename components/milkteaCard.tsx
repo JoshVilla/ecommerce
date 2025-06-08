@@ -4,7 +4,7 @@ import { INewMilktea } from "@/app/admin/products/page";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { Heart } from "lucide-react";
+import { Badge, Heart } from "lucide-react";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store/store";
@@ -100,9 +100,14 @@ const MilkTeaCard = ({ data }: Props) => {
             />
           )}
         </motion.div>
-        <div className="mt-4 font-semibold">{data.name}</div>
-        <div className="text-gray-500 text-xs line-clamp-2 overflow-hidden">
-          {data.description}
+        <div className=" mt-4 flex flex-col">
+          {data.isSale && (
+            <div className=" bg-green-500 text-xs px-2 rounded-sm text-white w-[70px]  text-center">{`${data.saleAmount}% OFF`}</div>
+          )}
+          <div className="font-semibold">{data.name}</div>
+          <div className="text-gray-500 text-xs line-clamp-2 overflow-hidden">
+            {data.description}
+          </div>
         </div>
       </div>
 

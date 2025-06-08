@@ -34,6 +34,8 @@ const MilkteaInfo = ({ record }: Props) => {
   const [openSheet, setOpenSheet] = useState(false);
   const [order, setOrder] = useState<any>({});
 
+  const prices = record.isSale ? record.saledPrizes : record.sizes;
+
   const totalAmount = useMemo(() => {
     if (order) {
       const subtotal = Object.values(order).reduce(
@@ -139,11 +141,39 @@ const MilkteaInfo = ({ record }: Props) => {
 
             <div>
               <div className="mb-2">Size:</div>
+              {record.isSale && (
+                <div className="mb-4">
+                  <div className="font-bold text-sm mb-4">Previous Price</div>
+                  <div className="space-x-3">
+                    {record.sizes?.map((size, index) => (
+                      <Button
+                        key={index}
+                        size="sm"
+                        variant={"outline"}
+                        className="text-gray-500"
+                      >
+                        {`${size.size.charAt(0).toUpperCase()}${size.size.slice(
+                          1
+                        )} - ₱${size.price}`}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div className="flex items-center gap-4 mb-2">
+                {record.isSale && (
+                  <div className="font-bold text-sm">New Price</div>
+                )}
+                {record.isSale && (
+                  <div className=" bg-green-500 text-xs px-2 rounded-sm text-white w-[70px]  text-center">{`${record.saleAmount}% OFF`}</div>
+                )}
+              </div>
               <div className="space-x-3">
-                {record.sizes.map((size, index) => (
+                {prices?.map((size, index) => (
                   <Button
                     key={index}
                     size="sm"
+                    className="cursor-pointer"
                     variant={btnSizeActive === index ? "default" : "outline"}
                     onClick={() => {
                       setBtnSizeActive(index);
@@ -154,7 +184,9 @@ const MilkteaInfo = ({ record }: Props) => {
                       }));
                     }}
                   >
-                    {size.size.charAt(0)}
+                    {`${size.size.charAt(0).toUpperCase()}${size.size.slice(
+                      1
+                    )} - ₱${size.price}`}
                   </Button>
                 ))}
               </div>

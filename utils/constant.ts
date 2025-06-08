@@ -13,7 +13,6 @@ export const PAYMENT_SERVICE = {
   COD: 1,
 };
 
-//TODO: add more status success
 export const ORDER_STATUS = {
   CONFIRMING: 0,
   PREPARING: 1,

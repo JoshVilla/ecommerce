@@ -20,6 +20,8 @@ import DeleteMilktea from "./deleteMilktea";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { setMilktea } from "@/redux/slices/milkteaSlice";
+import SaleMilktea from "./saleMilktea";
+import { Badge } from "@/components/ui/badge";
 
 export interface INewMilktea extends IMilktea {
   _id: string;
@@ -34,7 +36,7 @@ const Page = () => {
     queryFn: () => getMilktea({}),
   });
 
-  const tableHeaders = ["Name", "Description", "Actions"];
+  const tableHeaders = ["Name", "Description", "Sale", "Actions"];
 
   const renderTableBody = () => {
     if (isLoading) {
@@ -67,6 +69,13 @@ const Page = () => {
           {milktea.description}
         </TableCell>
         <TableCell>
+          {milktea.isSale ? (
+            <Badge color="blue">Discounted</Badge>
+          ) : (
+            <Badge variant="secondary">Not Discounted</Badge>
+          )}
+        </TableCell>
+        <TableCell>
           <DeleteMilktea refetch={refetch} record={milktea} />
           <Button
             variant="ghost"
@@ -77,6 +86,7 @@ const Page = () => {
           >
             <Pencil className="text-blue-400" />
           </Button>
+          <SaleMilktea record={milktea} refetch={refetch} />
         </TableCell>
       </TableRow>
     ));

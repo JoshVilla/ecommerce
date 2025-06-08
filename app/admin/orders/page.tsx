@@ -88,7 +88,10 @@ const Page = () => {
           {order.paymentServiceMode ? "Cash on Delivery" : "Pickup"}
         </TableCell>
         <TableCell>
-          <RenderOrderStatusBadge status={order.orderStatus} />
+          <RenderOrderStatusBadge
+            status={order.orderStatus}
+            paymentService={order.paymentServiceMode}
+          />
         </TableCell>
         <TableCell>{formattedDate(order.createdAt)}</TableCell>
         <TableCell>
