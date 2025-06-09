@@ -48,9 +48,6 @@ const Page = () => {
     usePagination({
       initialItemsPerPage: 6,
     });
-  const userState = useSelector(
-    (state: RootState) => state.user.user as IUserState
-  );
   const [pendingOrderData, setPendingOrderData] = useState<IOrder[]>([]);
 
   const { data, isLoading } = useQuery({

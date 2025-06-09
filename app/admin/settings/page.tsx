@@ -1,5 +1,4 @@
 "use client";
-import TitlePage from "@/components/titlePage";
 import { Separator } from "@/components/ui/separator";
 import React, { useState } from "react";
 import MainSettings from "./mainSettings";

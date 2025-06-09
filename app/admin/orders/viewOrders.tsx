@@ -2,8 +2,6 @@ import React from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -39,11 +37,6 @@ const ViewOrders = ({ orders }: Props) => {
             </div>
           ))}
         </div>
-        {/* <DialogFooter>
-          <Button type="submit" size="sm">
-            Ok
-          </Button>
-        </DialogFooter> */}
       </DialogContent>
     </Dialog>
   );
