@@ -17,12 +17,12 @@ import { IOrder } from "@/utils/types";
 import RenderOrderStatusBadge from "@/components/orderStatus";
 import ViewOrders from "./viewOrders";
 import { formattedDate } from "@/utils/nonAsyncHelpers";
-import PaginationComponent from "@/components/pagination";
 import SearchFormWithParams from "@/components/SearchFormWithParams";
 import { searchProps } from "./searchProps";
 import { usePagination } from "@/hooks/usePagination";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import CustomPaginationComponent from "@/components/pagination";
 
 const Page = () => {
   const router = useRouter();
@@ -133,7 +133,7 @@ const Page = () => {
           <TableBody>{renderTableRows()}</TableBody>
         </Table>
         <div>
-          <PaginationComponent
+          <CustomPaginationComponent
             pageState={pageState}
             onChangePage={(page) => handlePageStateChange(page)}
           />

@@ -18,11 +18,9 @@ import React, { useEffect, useState } from "react";
 import { paymentServiceText } from "@/utils/nonAsyncHelpers";
 import RenderOrderStatusBadge from "@/components/orderStatus";
 import { toast } from "sonner";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
 import { motion } from "framer-motion";
 import { usePagination } from "@/hooks/usePagination";
-import PaginationComponent from "@/components/pagination";
+import CustomPaginationComponent from "@/components/pagination";
 
 const ORDER_STATUS_DELIVER_OPTIONS = [
   { value: ORDER_STATUS.CONFIRMING, label: "Confirming" },
@@ -194,7 +192,7 @@ const Page = () => {
             </div>
           </motion.div>
         ))}
-        <PaginationComponent
+        <CustomPaginationComponent
           pageState={pageState}
           onChangePage={handlePageStateChange}
         />

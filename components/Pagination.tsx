@@ -21,7 +21,7 @@ interface PaginationComponentProps {
   onChangePage: (page: number) => void;
 }
 
-const PaginationComponent: React.FC<PaginationComponentProps> = ({
+const CustomPaginationComponent: React.FC<PaginationComponentProps> = ({
   pageState,
   onChangePage,
 }) => {
@@ -93,4 +93,4 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   );
 };
 
-export default PaginationComponent;
+export default CustomPaginationComponent;

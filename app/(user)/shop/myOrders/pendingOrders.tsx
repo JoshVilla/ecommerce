@@ -17,8 +17,8 @@ import {
 } from "@/components/ui/tooltip";
 import { toast } from "sonner";
 import { usePagination } from "@/hooks/usePagination";
+import CustomPaginationComponent from "@/components/pagination";
 //@ts-ignore
-import PaginationComponent from "@/components/pagination";
 
 const OrderItem = ({ item }: { item: IMyOrders }) => (
   <div className="text-xs text-gray-500">
@@ -169,7 +169,7 @@ const PendingOrders = () => {
       {activeOrders.map((order: IOrder) => (
         <OrderCard key={order._id} order={order} onCancel={handleCancelOrder} />
       ))}
-      <PaginationComponent
+      <CustomPaginationComponent
         pageState={pageState}
         onChangePage={handlePageStateChange}
       />
