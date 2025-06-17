@@ -5,18 +5,17 @@ import MilkTeaCard from "@/components/milkteaCard";
 import TitlePage from "@/components/titlePage";
 import { RootState } from "@/redux/store/store";
 import { getMyFavorites } from "@/service/api";
+import { LOADER_COUNT } from "@/utils/constant";
 import { IUserState } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import React, { ReactNode } from "react";
 import { useSelector } from "react-redux";
-import { LOADER_COUNT } from "../newProducts/page";
 
 const Page = () => {
   const userState = useSelector(
     (state: RootState) => state.user.user as IUserState
   );
-  const customerId = userState?._id;
 
   const { data, isLoading } = useQuery({
     queryKey: ["favorites"],

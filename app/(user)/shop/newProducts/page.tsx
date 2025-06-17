@@ -8,10 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { motion } from "framer-motion";
 import MilkTeaCard from "@/components/milkteaCard";
-import { ANIMATION_CONFIG, TAG_CATEGORY } from "@/utils/constant";
+import { ANIMATION_CONFIG, LOADER_COUNT, TAG_CATEGORY } from "@/utils/constant";
 import MilkteaLoader from "@/components/loader/milkteaLoader";
-
-export const LOADER_COUNT = 6;
 
 const ProductGrid: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="flex items-center gap-6 flex-wrap">{children}</div>
