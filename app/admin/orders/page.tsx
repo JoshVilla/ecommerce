@@ -22,7 +22,7 @@ import { searchProps } from "./searchProps";
 import { usePagination } from "@/hooks/usePagination";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import CustomPagination from "@/components/pagination";
+import CustomPagination from "@/components/customPagination";
 
 const Page = () => {
   const router = useRouter();

@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/tooltip";
 import { toast } from "sonner";
 import { usePagination } from "@/hooks/usePagination";
-import CustomPagination from "@/components/pagination";
+import CustomPagination from "@/components/customPagination";
 //@ts-ignore
 
 const OrderItem = ({ item }: { item: IMyOrders }) => (

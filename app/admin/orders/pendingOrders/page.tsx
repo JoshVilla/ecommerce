@@ -20,7 +20,7 @@ import RenderOrderStatusBadge from "@/components/orderStatus";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { usePagination } from "@/hooks/usePagination";
-import CustomPagination from "@/components/pagination";
+import CustomPagination from "@/components/customPagination";
 
 const ORDER_STATUS_DELIVER_OPTIONS = [
   { value: ORDER_STATUS.CONFIRMING, label: "Confirming" },
