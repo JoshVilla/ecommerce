@@ -9,6 +9,7 @@ export const searchProps: any[] = [
     label: "Status",
     name: "status",
     type: "select",
+    placeholder: "Select status",
     options: [
       { label: "Super Admin", value: "superadmin" },
       { label: "Admin", value: "admin" },

@@ -10,26 +10,32 @@ import { searchProps } from "./searchProps";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { IAdmin } from "@/models/adminModel";
 import { Loader2, Pencil, Trash } from "lucide-react";
 import { motion } from "framer-motion";
+import SearchFormWithParams from "@/components/SearchFormWithParams";
+import DeleteAdmin from "./deleteAdmin";
 
 const Page = () => {
   const [dataAdmin, setDataAdmin] = useState<IAdmin[]>([]);
+  const [searchParams, setSearchParams] = useState({});
   const tableHeaders: string[] = ["Username", "Status", "Actions"];
 
   const { isLoading, data, refetch } = useQuery({
-    queryKey: ["admins"],
-    queryFn: () => getAdmin({}),
+    queryKey: ["admins", searchParams],
+    queryFn: () => getAdmin(searchParams),
   });
+
+  const handleSearch = (params: any) => {
+    setSearchParams(params);
+  };
 
   useEffect(() => {
     if (data) {
@@ -73,13 +79,7 @@ const Page = () => {
           >
             <Pencil />
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="cursor-pointer hover:scale-105 transition"
-          >
-            <Trash />
-          </Button>
+          <DeleteAdmin id={admin._id} refetch={refetch} />
         </TableCell>
       </TableRow>
     ));
@@ -94,10 +94,9 @@ const Page = () => {
       <TitlePage title="List of Admins" />
       <div className="mt-6">
         <AddAdmin refetch={refetch} />
-        <SearchForm
-          api={getAdmin}
-          result={setDataAdmin}
+        <SearchFormWithParams
           searchProps={searchProps}
+          onSearch={handleSearch}
         />
         <Table>
           <TableHeader>

@@ -111,3 +111,19 @@ export const addMilkteaDiscount = async (params: any): Promise<any> => {
 export const removeMilkteaDiscount = async (params: any): Promise<any> => {
   return await post("/api/admin/product/removeDiscount", params);
 };
+
+export const removeAdmin = async (params: any): Promise<any> => {
+  return await post("/api/admin/deleteAdmin", params);
+};
+
+export const addDeliveryAccount = async (params: any): Promise<any> => {
+  return await post("/api/admin/deliveryAccount/addAccount", params);
+};
+
+export const getDeliveryAccount = async (params: any): Promise<any> => {
+  return await post("/api/admin/deliveryAccount", params);
+};
+
+export const deleteDeliveryAccount = async (params: any): Promise<any> => {
+  return await post("/api/admin/deliveryAccount/deleteAccount", params);
+};

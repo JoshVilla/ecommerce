@@ -27,13 +27,17 @@ export async function POST(req: NextRequest) {
     await newAdmin.save();
 
     return NextResponse.json(
-      { message: "Admin created successfully", admin: newAdmin },
+      {
+        message: "Admin created successfully",
+        isSuccess: true,
+        admin: newAdmin,
+      },
       { status: 201 }
     );
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      { message: "Internal Server Error" },
+      { message: "Internal Server Error", isSuccess: false },
       { status: 500 }
     );
   }

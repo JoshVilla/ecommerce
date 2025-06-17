@@ -23,7 +23,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { addAdmin } from "@/service/api";
+import { addAdmin, addDeliveryAccount } from "@/service/api";
 import { toast } from "sonner";
 
 const schema = z.object({
@@ -32,7 +32,6 @@ const schema = z.object({
     .string()
     .min(8, "Password must be at least 8 characters")
     .max(20, "Password must be at most 20 characters"),
-  status: z.enum(["admin", "superadmin"]),
 });
 
 type FormSchema = z.infer<typeof schema>;
@@ -41,7 +40,7 @@ interface AddAdminProps {
   refetch: () => void;
 }
 
-const AddAdmin: React.FC<AddAdminProps> = ({ refetch }) => {
+const AddAccount: React.FC<AddAdminProps> = ({ refetch }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -50,16 +49,15 @@ const AddAdmin: React.FC<AddAdminProps> = ({ refetch }) => {
     defaultValues: {
       username: "",
       password: "",
-      status: "admin",
     },
   });
 
-  const addAdminMutation = useMutation({
-    mutationFn: addAdmin,
+  const addMutation = useMutation({
+    mutationFn: addDeliveryAccount,
     onSuccess: (data) => {
       if (data.isSuccess) {
         refetch();
-        toast.success("Admin added successfully!");
+        toast.success(data.message);
         form.reset();
         setOpenDialog(false);
       } else {
@@ -72,7 +70,7 @@ const AddAdmin: React.FC<AddAdminProps> = ({ refetch }) => {
   });
 
   const onSubmit = (data: FormSchema) => {
-    addAdminMutation.mutate(data);
+    addMutation.mutate(data);
   };
 
   useEffect(() => {
@@ -83,14 +81,14 @@ const AddAdmin: React.FC<AddAdminProps> = ({ refetch }) => {
     <Dialog onOpenChange={setOpenDialog} open={openDialog}>
       <DialogTrigger asChild>
         <Button variant="default" size="sm">
-          New Admin
+          New Account
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>New Admin</DialogTitle>
+          <DialogTitle>New Account</DialogTitle>
           <DialogDescription>
-            Fill out the form to add a new admin account.
+            Fill out the form to add a new delivery account.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -151,40 +149,8 @@ const AddAdmin: React.FC<AddAdminProps> = ({ refetch }) => {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="status"
-              render={({ field }) => (
-                <FormItem className="space-y-3">
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      value={field.value}
-                      className="flex flex-col space-y-1"
-                    >
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="admin" />
-                        </FormControl>
-                        <FormLabel className="font-normal">Admin</FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="superadmin" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          Super Admin
-                        </FormLabel>
-                      </FormItem>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button type="submit" disabled={addAdminMutation.isPending}>
-              {addAdminMutation.isPending ? "Creating..." : "Add Admin"}
+            <Button type="submit" disabled={addMutation.isPending}>
+              {addMutation.isPending ? "Adding..." : "Add"}
             </Button>
           </form>
         </Form>
@@ -193,4 +159,4 @@ const AddAdmin: React.FC<AddAdminProps> = ({ refetch }) => {
   );
 };
 
-export default AddAdmin;
+export default AddAccount;

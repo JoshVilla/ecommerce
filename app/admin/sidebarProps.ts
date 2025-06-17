@@ -39,6 +39,10 @@ export const navMain = [
         title: "Admins",
         url: "/admin/admins",
       },
+      {
+        title: "Delivery Accounts",
+        url: "/admin/deliveryAccounts",
+      },
     ],
   },
 ];
