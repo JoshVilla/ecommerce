@@ -61,7 +61,10 @@ const BasicInfo = () => {
       email: userState?.email || "",
       birthdate: userState?.birthdate || "",
       phone: userState?.phone || "",
-      gender: userState?.gender || "",
+      gender:
+        userState?.gender === "male" || userState?.gender === "female"
+          ? userState.gender
+          : undefined,
     },
   });
 
