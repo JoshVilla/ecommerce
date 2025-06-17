@@ -22,7 +22,7 @@ import { searchProps } from "./searchProps";
 import { usePagination } from "@/hooks/usePagination";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import CustomPaginationComponent from "@/components/pagination";
+import CustomPagination from "@/components/pagination";
 
 const Page = () => {
   const router = useRouter();
@@ -133,7 +133,7 @@ const Page = () => {
           <TableBody>{renderTableRows()}</TableBody>
         </Table>
         <div>
-          <CustomPaginationComponent
+          <CustomPagination
             pageState={pageState}
             onChangePage={(page) => handlePageStateChange(page)}
           />

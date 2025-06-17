@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { getPendingOrder, updateOrderStatus } from "@/service/api";
 import { ORDER_STATUS } from "@/utils/constant";
-import { IMyOrders, IOrder, IUserState } from "@/utils/types";
+import { IMyOrders, IOrder } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { paymentServiceText } from "@/utils/nonAsyncHelpers";
@@ -20,7 +20,7 @@ import RenderOrderStatusBadge from "@/components/orderStatus";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { usePagination } from "@/hooks/usePagination";
-import CustomPaginationComponent from "@/components/pagination";
+import CustomPagination from "@/components/pagination";
 
 const ORDER_STATUS_DELIVER_OPTIONS = [
   { value: ORDER_STATUS.CONFIRMING, label: "Confirming" },
@@ -192,7 +192,7 @@ const Page = () => {
             </div>
           </motion.div>
         ))}
-        <CustomPaginationComponent
+        <CustomPagination
           pageState={pageState}
           onChangePage={handlePageStateChange}
         />

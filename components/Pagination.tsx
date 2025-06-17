@@ -3,8 +3,6 @@
 import * as React from "react";
 import {
   Pagination,
-  PaginationContent,
-  PaginationItem,
   PaginationLink,
   PaginationPrevious,
   PaginationNext,
@@ -21,7 +19,7 @@ interface PaginationComponentProps {
   onChangePage: (page: number) => void;
 }
 
-const CustomPaginationComponent: React.FC<PaginationComponentProps> = ({
+const CustomPagination: React.FC<PaginationComponentProps> = ({
   pageState,
   onChangePage,
 }) => {
@@ -93,4 +91,4 @@ const CustomPaginationComponent: React.FC<PaginationComponentProps> = ({
   );
 };
 
-export default CustomPaginationComponent;
+export default CustomPagination;
