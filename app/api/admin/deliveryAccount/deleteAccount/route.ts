@@ -12,10 +12,13 @@ export async function POST(req: NextRequest) {
       isSuccess: true,
     });
   } catch (error) {
-    console.log(error);
-    return {
-      message: "Unsuccessfull Operation, Try again later",
-      isSucces: false,
-    };
+    console.error("Error in deleteDeliveryAccount API:", error);
+    return NextResponse.json(
+      {
+        message: "Unsuccessful Operation, Try again later",
+        isSuccess: false,
+      },
+      { status: 500 }
+    );
   }
 }
