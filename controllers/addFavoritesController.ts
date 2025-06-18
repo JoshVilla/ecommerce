@@ -39,7 +39,7 @@ export async function addMyFavoritesController(
         data: favoritesDoc,
       };
     }
-
+    //@ts-ignore
     favoritesDoc.favorites.push(milkteaInfo);
     const updated = await favoritesDoc.save();
 

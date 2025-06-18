@@ -6,12 +6,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputPassword from "@/components/inputpassword";
 import { useMutation } from "@tanstack/react-query";
-import { login, loginAdmin } from "@/service/api";
+import { loginAdmin } from "@/service/api";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { setUser } from "@/redux/slices/userSlice";
 import { motion } from "framer-motion";
 import { setAdmin } from "@/redux/slices/adminSlice";
 

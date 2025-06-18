@@ -26,7 +26,6 @@ import PasswordIndicator from "@/components/passwordIndicator";
 import { useMutation } from "@tanstack/react-query";
 import { signup } from "@/service/api";
 import { Loader2 } from "lucide-react";
-import { IUser } from "@/utils/types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import TitlePage from "@/components/titlePage";
