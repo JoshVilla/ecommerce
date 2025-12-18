@@ -37,6 +37,7 @@ const Page = () => {
                   key={milktea._id}
                   className="w-40 h-80 flex flex-col justify-between"
                   {...ANIMATION_CONFIG}
+                  //@ts-ignore
                   transition={{
                     ...ANIMATION_CONFIG.transition,
                     delay: index * 0.1,
