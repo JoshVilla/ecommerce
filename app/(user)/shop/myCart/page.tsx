@@ -4,8 +4,7 @@ import Container from "@/components/container";
 import TitlePage from "@/components/titlePage";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { LeftArrow } from "next/dist/client/components/react-dev-overlay/ui/icons/left-arrow";
-import { RightArrow } from "next/dist/client/components/react-dev-overlay/ui/icons/right-arrow";
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import { IMyOrders, IUser, IUserAddress, IUserState } from "@/utils/types";
@@ -136,7 +135,7 @@ const Page = () => {
                   }
                   disabled={order.quantity <= 1}
                 >
-                  <LeftArrow />
+                  <ArrowLeft />
                 </Button>
                 <span>{order.quantity}</span>
                 <Button
@@ -147,7 +146,7 @@ const Page = () => {
                     handleQuantityChange(order.id, order.quantity + 1)
                   }
                 >
-                  <RightArrow />
+                  <ArrowRight />
                 </Button>
               </div>
               <div className="text-xs text-gray-500">{order.description}</div>

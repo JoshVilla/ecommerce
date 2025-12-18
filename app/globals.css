@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&family=Open+Sans:wght@300..800&family=Poppins:wght@100..900&family=Roboto:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&family=Open+Sans:wght@300..800&family=Poppins:wght@100..900&family=Roboto:wght@100..900&display=swap');
 @custom-variant dark (&:is(.dark *));
 
 /* Apply box-sizing globally but avoid resetting margin */
@@ -10,8 +16,10 @@
 }
 
 body {
-  margin: 0; /* Optional: Reset body margin if needed */
-  padding: 0; /* Optional: Reset body padding if needed */
+  margin: 0;
+  /* Optional: Reset body margin if needed */
+  padding: 0;
+  /* Optional: Reset body padding if needed */
   @apply bg-background text-foreground;
   font-family: 'Poppins', sans-serif;
 }
@@ -127,6 +135,7 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Poppins', sans-serif;

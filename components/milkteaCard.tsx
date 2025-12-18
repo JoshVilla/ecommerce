@@ -27,9 +27,9 @@ const MilkTeaCard = ({ data }: Props) => {
     (state: RootState) => state.user.user as IUserState
   );
   const customerId = userState?._id;
-  const favoriteState = useSelector(
-    (state: RootState) => state.favorites.favorites
-  );
+ const favoriteState = useSelector(
+  (state: RootState) => state.favorites.favorites ?? []
+);
 
   const [mode, setMode] = useState<"add" | "remove">("add");
 

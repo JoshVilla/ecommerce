@@ -3,13 +3,10 @@
 import { INewMilktea } from "@/app/admin/products/page";
 import Container from "@/components/container";
 import TitlePage from "@/components/titlePage";
-import { Button } from "@/components/ui/button";
 import { getMilktea } from "@/service/api";
 import { useQuery } from "@tanstack/react-query";
 import { Heart } from "lucide-react";
-import Image from "next/image";
 import React, { ReactNode, useState } from "react";
-import MilkteaInfo from "./milkteaInfo";
 import { motion } from "framer-motion";
 import MilkTeaCard from "@/components/milkteaCard";
 import MilkteaLoader from "@/components/loader/milkteaLoader";
