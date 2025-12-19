@@ -1,4 +1,5 @@
 {
+  "version": 3,
   "crons": [
     {
       "path": "/api/cron/logs",
